@@ -1,0 +1,257 @@
+@import url('https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css');
+
+div#main-menu {  
+  overflow-x: hidden;
+}
+
+div#main-menu-layer {
+  width: 100vw;
+  height: auto;
+  background-color: #17141d;
+}
+
+div#secondary-menu {
+  display: block;
+  flex-direction: row;
+  text-align: center;
+  width: auto;
+  height: auto;
+/*   background-image: url("./Logo-DIBBA-SemTexto.png"); */
+  background-repeat: no-repeat;
+  background-size: 50vw;
+  background-position: center;
+}
+
+div#menu-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100%;
+  padding: 4em 0 2em 0;
+  margin-bottom: 20px;
+}
+
+/* <MENU_EVENTS> */
+
+div#menu-events {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  height: 100%;
+  margin-top: 2em;
+}
+
+/* <CREATE_EVENTS> */
+
+div#create-events {
+  width: 35vw;
+  height: 60vh;
+}
+
+div#create-events > a{
+  color: white;
+  text-decoration: none;
+}
+
+div#create-events > a > h2{
+  font-size: 2rem;
+  color: rgb(255, 255, 255);
+  background: linear-gradient(90deg, rgba(121, 55, 202, 0.781), rgba(38, 44, 162, 0.753));
+  padding: 0.9em;
+  margin: auto;
+  text-align: center;
+}
+
+/* </CREATE_EVENTS> */
+
+/* <MY_EVENTS> */
+
+div#my-events {
+  width: 35vw;
+  height: 60vh;
+}
+
+div#my-events > a{
+  color: white;
+  text-decoration: none;
+}
+
+div#my-events > a > h2{
+  font-size: 2rem;
+  color: rgb(255, 255, 255);
+  margin: auto;
+  text-align: center;
+  background: linear-gradient(90deg, rgba(121, 55, 202, 0.781), rgba(38, 44, 162, 0.753));
+  padding: 0.9em;
+}
+
+/* </MY_EVENTS> */
+
+/* </MENU_EVENTS> */
+
+#link {
+  color: #fff;
+  text-decoration: none;
+}
+
+i.botao{
+  display: block;
+  text-align: center;
+  margin: auto;
+  padding-top: 1em;
+}
+
+/* <RESPONSIVE> */
+
+@media screen and (max-width: 899px) {
+    div#main-menu {
+      overflow-x: hidden;
+    }
+    div#main-menu-layer {
+      width: 100vw;
+      height: auto;
+      background-color: #17141d;
+    }
+    div#secondary-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  
+      width: auto;
+      height: auto;
+      /* background-color: #17141d; */
+      background-color: transparent;
+    }
+    div#menu-profile {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  
+      margin-bottom: 20px;
+      width: 100vw;
+      height: 100%;
+      background-color: transparent;
+    }
+    div#menu-profile-scope {
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      padding: 10px;
+  
+      margin-top: 30px;
+      margin-bottom: 30px;
+      width: 50%;
+      height: auto;
+      border-radius: 20px;
+      /* background: linear-gradient(140deg, rgb(25, 230, 185), rgb(47, 118, 250), rgb(231, 62, 231)); */
+      /* background-color: #fff; */
+      background: linear-gradient(90deg, rgb(122, 55, 202), rgb(38, 45, 162));
+    }
+    .text {
+      color: #fff;
+    }
+    div#menu-events {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  
+      width: 100vw;
+      height: 100%;
+    }
+  
+    /* CREATE EVENTS */
+  
+    div#create-events {
+      display: flex;
+      flex-direction: column;
+  
+      width: 100%;
+      height: 50vh;
+/*       background-image: linear-gradient(#17141dee, #17141df5), url("./dibba.jpeg"); */
+  
+      background-position: center;
+      background-size: contain;
+    }
+    div#create-events h2#text-create-event {
+      font-size: 42px;
+      color: rgb(255, 255, 255);
+    }
+    div#create-events-up {
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+  
+      height: 70%;
+      padding-top: 50px;
+      padding-left: 50px;
+      padding-right: 600px;
+    }
+    div#create-events-down {
+      display: flex;
+      flex-direction: row;
+      justify-content: right;
+  
+      padding-right: 150px;
+    }
+    div#create-events-down button#create-event {
+      width: 120px;
+      height: 40px;
+      border: none;
+      border-radius: 5px;
+  
+      background: linear-gradient(90deg, rgb(122, 55, 202), rgb(38, 45, 162));
+      color: #fff;
+    }
+    .link {
+      color: #fff;
+      text-decoration: none;
+    }
+  
+    /* MY EVENTS */
+  
+    div#my-events {
+      display: flex;
+      flex-direction: column;
+  
+      width: 100%;
+      height: 50vh;
+    }
+    div#my-events h3#text-my-events {
+      font-size: 32px;
+      color: rgb(255, 255, 255);
+    }
+    div#my-events-up {
+      display: flex;
+      justify-content: center;
+  
+      padding-top: 60px;
+      width: 100%;
+    }
+    div#my-events-down {
+      display: flex;
+      justify-content: center;
+  
+      width: 100%;
+      height: auto;
+      padding-top: 35px;
+    }
+    button#my-events {
+      width: 120px;
+      height: 40px;
+      border: none;
+      border-radius: 5px;
+  
+      background: linear-gradient(90deg, rgb(122, 55, 202), rgb(38, 45, 162));
+      color: #fff;
+    }
+    #link {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  /* </RESPONSIVE> */

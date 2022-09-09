@@ -2,14 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {HomeView} from "./views/home/homeView";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HomeView } from "./views/home/homeView";
+import { SignInView } from './views/signIn/signInView';
+import { SignUpView } from './views/signUp/signUpView';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
       <Routes>
           <Route path={"/"} element={<HomeView/>}/>
+          <Route path={"/sign-in"} element={<SignInView/>}/>
+          <Route path={"/sign-up"} element={<SignUpView/>}/>
       </Routes>
   </BrowserRouter>
 );

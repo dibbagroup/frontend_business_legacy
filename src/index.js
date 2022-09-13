@@ -11,8 +11,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
       <Routes>
-          <Route path={"/"} element={<HomeView/>}/>
-          <Route path={"/sign-in"} element={<SignInView/>}/>
+          <Route path={"/"} element={<SignInView/>}/>
+          <Route path={"/menu"} element={<HomeView/>}/>
           <Route path={"/sign-up"} element={<SignUpView/>}/>
       </Routes>
   </BrowserRouter>

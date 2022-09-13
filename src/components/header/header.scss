@@ -1,0 +1,27 @@
+main{
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+
+    div.logo-image{
+        margin-left: 1em;
+        color: white;
+        font-size: 0.7rem;
+    }
+
+    ul{
+        width: 100%;
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    
+        li{
+            padding: 1em;
+            color: white;
+            font-size: 1rem;
+        }
+    }
+}

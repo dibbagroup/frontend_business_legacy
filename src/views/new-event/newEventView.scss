@@ -1,0 +1,82 @@
+/* <Step One> */
+
+main.main-form-1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #17141d;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  
+  main.main-form-1 > h1.text-title {
+    margin: 1.2em auto;
+    color: rgb(241, 240, 240);
+  }
+  
+  form.form-1{
+    display: flex;
+    flex-direction: column;
+    padding: 1em 1.5em !important;
+    justify-content: space-around;
+    margin-bottom: 50px;
+    width: 75vw !important;
+    border-radius: 10px;
+    margin: 0 40px 0 40px !important;
+    background-color: white;
+  }
+  
+  form.form-1 > h2.text-etapa{
+    text-align: center;
+  }
+  
+  form.form-1 > p.text-subtitle {
+    color: rgb(241, 240, 240);
+    text-align: center;
+    font-size: 1.5rem;
+    width: 90%;
+    margin: 1em auto 2em;
+    color: black;
+  }
+  
+  .flex{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .inputFlex{
+    width: 49%;
+  }
+  
+  .next {
+    display: flex;
+    width: auto;
+    height: 35px;
+    border-radius: 2px;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    color: aliceblue;
+    text-decoration: none;
+    background: linear-gradient(90deg, rgb(122, 55, 202), rgb(38, 45, 162));
+    margin-bottom: 1em;
+  }
+  
+  .next:hover {
+    color: aliceblue;
+  }
+
+/* </Step One> */
+
+/* <Step Two> */
+
+/* </Step Two> */
+
+/* <Step Third> */
+
+/* </Step Third> */
+
+/* <Step Four> */
+
+/* </Step Four> */

@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HomeView } from "./views/home/homeView";
 import { SignInView } from './views/signIn/signInView';
 import { SignUpView } from './views/signUp/signUpView';
+import { NewEventView } from './views/new-event/newEventView';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +14,7 @@ root.render(
       <Routes>
           <Route path={"/"} element={<SignInView/>}/>
           <Route path={"/menu"} element={<HomeView/>}/>
+          <Route path={"/event/new"} element={<NewEventView/>}/>
           <Route path={"/sign-up"} element={<SignUpView/>}/>
       </Routes>
   </BrowserRouter>

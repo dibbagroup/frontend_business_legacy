@@ -86,6 +86,8 @@ export const NewEventView = (_) => {
             <main className="stepOne p-5">
                 {/* HEADER */}
 
+                <hr className="my-4" />
+
                 {step === 0 && (
                     <form>
                         <Row>
@@ -277,7 +279,7 @@ export const NewEventView = (_) => {
                                     label="Categoria de Ingressos"
                                     className="mb-3"
                                 >
-                                    <Form.Select aria-label="Categoria de Ingressos"> 
+                                    <Form.Select aria-label="Categoria de Ingressos">
                                         <option>Escolha...</option>
                                         <option value="1">Individuais</option>
                                         <option value="2">Áreas</option>
@@ -287,69 +289,7 @@ export const NewEventView = (_) => {
                             </Col>
 
                             {/* RIGHT SIDE */}
-                            <Col>
-                                <h4>Local</h4>
-
-                                <Row>
-                                    <Col xs={3}>
-                                        <FloatingLabel label={uf} className="mb-3">
-                                            <Form.Control type="text" placeholder="Rua" disabled />
-                                        </FloatingLabel>
-                                    </Col>
-                                    <Col>
-                                        <FloatingLabel label={city} className="mb-3">
-                                            <Form.Control type="text" placeholder="Rua" disabled />
-                                        </FloatingLabel>
-                                    </Col>
-                                </Row>
-
-                                <Row>
-                                    <Col xs={3}>
-                                        <FloatingLabel label={neighborhood} className="mb-3">
-                                            <Form.Control type="text" placeholder="Bairro" disabled />
-                                        </FloatingLabel>
-                                    </Col>
-
-                                    <Col>
-                                        <FloatingLabel label={street} className="mb-3">
-                                            <Form.Control type="text" placeholder="Rua" disabled />
-                                        </FloatingLabel>
-                                    </Col>
-                                </Row>
-
-                                <Row>
-                                    <Col xs={3}>
-                                        <FloatingLabel label="Número" className="mb-3">
-                                            <Form.Control
-                                                type="number"
-                                                id="new-event-number"
-                                                placeholder="Número"
-                                                required
-                                                onChange={() => {
-                                                    setNumber(
-                                                        document.getElementById("new-event-number").value
-                                                    );
-                                                }}
-                                            />
-                                        </FloatingLabel>
-                                    </Col>
-
-                                    <Col>
-                                        <FloatingLabel label="Complemento" className="mb-3">
-                                            <Form.Control
-                                                type="text"
-                                                id="new-event-complement"
-                                                placeholder="Complemento"
-                                                onChange={() => {
-                                                    setComplement(
-                                                        document.getElementById("new-event-complement").value
-                                                    );
-                                                }}
-                                            />
-                                        </FloatingLabel>
-                                    </Col>
-                                </Row>
-                            </Col>
+                            
                         </Row>
                     </form>
                 )}
@@ -371,11 +311,13 @@ export const NewEventView = (_) => {
 
     return (
         <main className="p-5">
+
             <div>
                 <Row>
                     <Col>
                         <h2 className="text-dark">Etapa {step + 1}/3</h2>
                     </Col>
+
                     {step >= 1 && (
                         <Col xs={1}>
                             <Button
@@ -388,6 +330,7 @@ export const NewEventView = (_) => {
                             </Button>
                         </Col>
                     )}
+
                     <Col xs={1}>
                         <Button
                             variant="outline-success"
@@ -401,19 +344,41 @@ export const NewEventView = (_) => {
                 </Row>
                 <Row>
                     <Col>
-                        <p>
-                            Para começar, nos conte um pouco sobre as informações do seu
-                            evento. lembre-se que essa parte é como ficará visível para o
-                            público da nossa plataforma
-                        </p>
+                        {step === 0 && (
+                            <p>
+                                Para começar, nos conte um pouco sobre as informações do seu
+                                evento. lembre-se que essa parte é como ficará visível para o
+                                público da nossa plataforma
+                            </p>
+                        )}
+
+                        {step === 1 && (
+                            <p>
+                                Continuando,
+                            </p>
+                        )}
+
+                        {step === 2 && (
+                            <p>
+                                Para encerrar, precisamos definir a seleção das taxas...
+                            </p>
+                        )}
                     </Col>
                     <Col />
                 </Row>
             </div>
 
-            <hr className="my-4" />
+            {step === 0 && (
+                <StepOne />
+            )}
 
-            <StepOne />
+            {step === 1 && (
+                <StepTwo />
+            )}
+
+            {step === 2 && (
+                <StepThree />
+            )}
         </main >
     );
 };

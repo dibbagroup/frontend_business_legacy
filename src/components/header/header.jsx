@@ -9,7 +9,7 @@ export const Header = _ => {
             </div>
             <ul>
                 <li>Home</li>
-                <li>Criar Evento</li>
+                <li><a href="/event/new">Criar Evento</a></li>
                 <li>Resultados</li>
                 <li>Meus Eventos</li>
                 <li>Dibba Costumer</li>

@@ -10,7 +10,7 @@ export const SignInView = _ => {
                         <input type="text" id="inputEmail" placeholder="Email ou CNPJ" minLength={5} maxLength={50} required autofocus/>
                         <input type="password" id="inputPassword" placeholder="Senha" maxLength={30} required/>
                         <button className="btn btn-lg btn-block button-login" type="submit">Entrar</button>
-                        <small>Não possui cadastro? <a href="/signup">Cadastre-se já!</a> </small>
+                        <small>Não possui cadastro? <a href="/sign-up">Cadastre-se já!</a> </small>
                 </form>
             </div>
         </main>

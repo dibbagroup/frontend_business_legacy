@@ -43,6 +43,7 @@ main.main-form-1{
     width: 100%;
     display: flex;
     justify-content: space-around;
+    align-items: center;
   }
   
   .inputFlex{
@@ -75,8 +76,16 @@ main.main-form-1{
 
 /* <Step Third> */
 
+div.d{
+  text-align: center;
+  margin: auto;
+}
+
+div.d > p{
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  max-width: 25vw;
+}
+
 /* </Step Third> */
-
-/* <Step Four> */
-
-/* </Step Four> */

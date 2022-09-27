@@ -12,44 +12,18 @@ import axios from "axios";
 
 import "./newEventView.scss";
 import { Header } from "../../components/header/header";
-
-class Place {
-    cep = String;
-    uf = String;
-    city = String;
-    street = String;
-    number = 0;
-    complement = String;
-}
-
-class Lot {
-    startDate = Date;
-    endDate = Date;
-    ticketGender = String; /* (Unissex) ou (Fem e Masc) */
-    loteType = String; /* (Individual) ou (Area) */
-}
-
-class Event {
-    name = String;
-    gender = String;
-    description = String;
-    bannerImage = Image;
-    startDate = Date;
-    startTime = Date;
-    endTime = Date;
-    place = new Place();
-    descriptionPlace = String
-
-    minimumAge = 0;
-    imageCategorys = Image;
-    qtdLots = 0;
-    lots = [new Lot()];
-
-    taxes = Boolean;
-    paymentMethod = 0; /* D+15 ou D+30 */
-}
+import { Event } from "../../models/models";
 
 let eventObject = new Event();
+const CreateEvent = _ => {
+    axios.post(env.local.newEvent, eventObject)
+    .then((res) => {
+        console.log(res.data)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
 
 export const NewEventView = (_) => {
     const [step, setStep] = useState(0);
@@ -88,7 +62,6 @@ export const NewEventView = (_) => {
 
                 <hr className="my-4" />
 
-                
                 <form>
                     <Row>
                         {/* LEFT SIDE */}
@@ -101,6 +74,7 @@ export const NewEventView = (_) => {
                                         controlId="floatingInput"
                                         label="Título"
                                         className="mb-3"
+                                        value={Event.name}
                                     >
                                         <Form.Control type="text" placeholder="Título" />
                                     </FloatingLabel>
@@ -285,6 +259,31 @@ export const NewEventView = (_) => {
                     <Row>
                         <Col>
                             <h4 className="mt-4 text-center">Montando Lotes</h4>
+
+                            <Row>
+                                <h5 className="mt-2 text-center">Ingressos Individuais</h5>
+
+                                <Col>
+                                    <label htmlFor="nameArea" className="mb-1">Area do Evento</label>
+
+                                    <Form.Control
+                                        id="nameArea"
+                                        type="text"
+                                        placeholder="Ex: Pista Premium"
+                                    />
+                                </Col>
+
+                                <Col>
+                                    <label htmlFor="nameArea" className="mb-1">Area do Evento</label>
+
+                                    <Form.Control
+                                        id="nameArea"
+                                        type="text"
+                                        placeholder="Ex: Pista Premium"
+                                    />
+                                </Col>
+                                
+                            </Row>
                         </Col>
                     </Row>
                 </form>
@@ -350,7 +349,6 @@ export const NewEventView = (_) => {
 
     return (
         <main className="p-5">
-
             <div>
                 <Row>
                     <Col>
@@ -370,16 +368,18 @@ export const NewEventView = (_) => {
                         </Col>
                     )}
 
-                    <Col xs={1}>
-                        <Button
-                            variant="outline-success"
-                            onClick={() => {
-                                setStep(step + 1);
-                            }}
-                        >
-                            Avançar
-                        </Button>
-                    </Col>
+                    {step <= 1 && (
+                        <Col xs={1}>
+                            <Button
+                                variant="outline-success"
+                                onClick={() => {
+                                    setStep(step + 1);
+                                }}
+                            >
+                                Avançar
+                            </Button>
+                        </Col>
+                    )}
                 </Row>
                 <Row>
                     <Col>

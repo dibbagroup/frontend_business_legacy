@@ -9,21 +9,21 @@ import {
     Row,
 } from "react-bootstrap";
 import axios from "axios";
-
+import {env} from "../../data/env"
 import "./newEventView.scss";
 import { Header } from "../../components/header/header";
 import { Event } from "../../models/models";
 
-let eventObject = new Event();
-const CreateEvent = _ => {
-    axios.post(env.local.newEvent, eventObject)
-    .then((res) => {
-        console.log(res.data)
-    })
-    .catch((err) => {
-        console.log(err)
-    })
-}
+// let eventObject = new Event();
+// const CreateEvent = _ => {
+//     axios.post(env.local.newEvent, eventObject)
+//     .then((res) => {
+//         console.log(res.data)
+//     })
+//     .catch((err) => {
+//         console.log(err)
+//     })
+// }
 
 export const NewEventView = (_) => {
     const [step, setStep] = useState(0);
@@ -74,7 +74,6 @@ export const NewEventView = (_) => {
                                         controlId="floatingInput"
                                         label="Título"
                                         className="mb-3"
-                                        value={Event.name}
                                     >
                                         <Form.Control type="text" placeholder="Título" />
                                     </FloatingLabel>

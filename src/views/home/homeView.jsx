@@ -7,9 +7,9 @@ import "./homeView.scss"
 
 export const HomeView = _ => {
 
-    useEffect (()=>{
-        axios.get("http://localhost:9090/events").then((res)=>{console.log(res.data)})
-    },[])
+    // useEffect (()=>{
+    //     axios.get("http://localhost:9090/events").then((res)=>{console.log(res.data)})
+    // },[])
 
     return (
         <main className="menu">

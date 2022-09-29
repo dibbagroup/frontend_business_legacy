@@ -256,34 +256,85 @@ export const NewEventView = (_) => {
                     </Row>
 
                     <Row>
-                        <Col>
-                            <h4 className="mt-4 text-center">Montando Lotes</h4>
+                        <h4 className="mt-4 text-center">Montando Lotes</h4>
 
-                            <Row>
-                                <h5 className="mt-2 text-center">Ingressos Individuais</h5>
+                        <Row className="mt-4">
+                            <h5 className="text-center">Ingressos Individuais</h5>
 
-                                <Col>
-                                    <label htmlFor="nameArea" className="mb-1">Area do Evento</label>
+                            <Col className="mt-3">
+                                <label htmlFor="nameArea" className="mb-1">Area do Evento</label>
 
-                                    <Form.Control
-                                        id="nameArea"
-                                        type="text"
-                                        placeholder="Ex: Pista Premium"
-                                    />
-                                </Col>
+                                <Form.Control
+                                    id="nameArea"
+                                    type="text"
+                                    placeholder="Ex: Pista Premium"
+                                />
+                            </Col>
 
-                                <Col>
-                                    <label htmlFor="nameArea" className="mb-1">Area do Evento</label>
+                            <Col className="mt-3">
+                                <label htmlFor="ticketValueMasc" className="mb-1">Valor do Ingresso Masculino</label>
 
-                                    <Form.Control
-                                        id="nameArea"
-                                        type="text"
-                                        placeholder="Ex: Pista Premium"
-                                    />
-                                </Col>
-                                
-                            </Row>
-                        </Col>
+                                <Form.Control
+                                    id="ticketValueMasc"
+                                    type="number"
+                                    placeholder="Ex: R$ 87,00"
+                                />
+                            </Col>
+
+                            <Col className="mt-3">
+                                <label htmlFor="ticketValueFem" className="mb-1">Valor do Ingresso Feminino</label>
+
+                                <Form.Control
+                                    id="ticketValueFem"
+                                    type="number"
+                                    placeholder="Ex: R$ 65,00"
+                                />
+                            </Col>
+
+                            <Col className="mt-3">
+                                <label htmlFor="ticketsQuantity" className="mb-1">Quantidade de Ingressos</label>
+
+                                <Form.Control
+                                    id="ticketsQuantity"
+                                    type="number"
+                                    placeholder="Ex: 100 ingressos"
+                                />
+                            </Col>
+                        </Row>
+
+                        <Row className="mt-4">
+                            <h5 className="text-center">Ingressos por Área</h5>
+
+                            <Col className="mt-3">
+                                <label htmlFor="nameArea" className="mb-1">Area do Evento</label>
+
+                                <Form.Control
+                                    id="nameArea"
+                                    type="text"
+                                    placeholder="Ex: Camarote VIP"
+                                />
+                            </Col>
+
+                            <Col className="mt-3">
+                                <label htmlFor="areaValue" className="mb-1">Valor da Área</label>
+
+                                <Form.Control
+                                    id="areaValue"
+                                    type="number"
+                                    placeholder="Ex: R$ 500,00"
+                                />
+                            </Col>
+
+                            <Col className="mt-3">
+                                <label htmlFor="ticketsQuantityByArea" className="mb-1">Quantidade de Ingressos por Área</label>
+
+                                <Form.Control
+                                    id="ticketsQuantityByArea"
+                                    type="number"
+                                    placeholder="Ex: 10 ingressos"
+                                />
+                            </Col>
+                        </Row>
                     </Row>
                 </form>
             </main>

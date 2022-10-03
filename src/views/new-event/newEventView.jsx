@@ -9,7 +9,7 @@ import {
     Row,
 } from "react-bootstrap";
 import axios from "axios";
-import {env} from "../../data/env"
+import { env } from "../../data/env"
 import "./newEventView.scss";
 import { Header } from "../../components/header/header";
 import { Event } from "../../models/models";
@@ -26,30 +26,33 @@ import { Event } from "../../models/models";
 // }
 
 const getInputsValue = _ => {
+
     /* PAGE 1 */
-    let nameEvent = document.getElementById("nameEvent").value
-    let musicalGender = document.getElementById("musicalGender").value
+    let name = document.getElementById("name").value
+    let musicalType = document.getElementById("musicalType").value
     let description = document.getElementById("description").value
     let bannerImage = document.getElementById("bannerImage").value
     let cep = document.getElementById("cep").value
-    let uf = document.getElementById("uf").value
+    let state = document.getElementById("state").value
     let city = document.getElementById("city").value
-    let district = document.getElementById("district").value
-    let street = document.getElementById("street").value
+    /* let district = document.getElementById("district").value */
+    let address = document.getElementById("address").value
     let number = document.getElementById("number").value
     let complement = document.getElementById("complement").value
+    /* DATAS DEVEM SER INSERIDAS */
 
     /* PAGE 2 */
-    let minimiumAge = document.getElementById("minimiumAge").value
+    let ageClassification = document.getElementById("minimiumAge").value
     let categoryTickets = document.getElementById("categoryTickets").value
     let genderTickets = document.getElementById("ticketsCategory").value
-    let imageCategorys = document.getElementById("imageCategorys").value
+    let areaDistributionImage = document.getElementById("areaDistributionImage").value
     let lotsQuantity = document.getElementById("lotsQuantity").value
-    
+
     let eventArea = document.getElementById("eventArea").value /* tem que receber um array */
-    
 
-
+    /* PAGE 3 */
+    let taxes = document.getElementById("taxes").value
+    let paymentTerm = document.getElementById("paymentTerm").value
 }
 
 export const NewEventView = (_) => {
@@ -104,7 +107,7 @@ export const NewEventView = (_) => {
                                         label="Nome do Evento"
                                         className="mb-3"
                                     >
-                                        <Form.Control type="text" placeholder="Nome do Evento" id="nameEvent" />
+                                        <Form.Control type="text" placeholder="Nome do Evento" id="name" />
                                     </FloatingLabel>
                                 </Col>
 
@@ -114,7 +117,7 @@ export const NewEventView = (_) => {
                                         label="Gênero musical"
                                         className="mb-3"
                                     >
-                                        <Form.Select aria-label="Gênero musical">
+                                        <Form.Select aria-label="Gênero musical" id="musicalType">
                                             <option>Escolha...</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
@@ -132,12 +135,13 @@ export const NewEventView = (_) => {
                                 <Form.Control
                                     type="text"
                                     placeholder="Descrição"
+                                    id="description"
                                     as="textarea"
                                     style={{ height: "130px" }}
                                 />
                             </FloatingLabel>
 
-                            <Form.Control type="file" size="md" className="mb-3" />
+                            <Form.Control type="file" id="bannerImage" size="md" className="mb-3" />
                         </Col>
 
                         {/* RIGHT SIDE */}
@@ -148,6 +152,7 @@ export const NewEventView = (_) => {
                                     type="text"
                                     placeholder="CEP"
                                     id="new-event-cep"
+                                    /* CONFERIR ID */
                                     maxLength={9}
                                     onChange={() => {
                                         getCEP(document.getElementById("new-event-cep").value);
@@ -158,12 +163,12 @@ export const NewEventView = (_) => {
                             <Row>
                                 <Col xs={3}>
                                     <FloatingLabel label={uf} className="mb-3">
-                                        <Form.Control type="text" placeholder="Rua" disabled />
+                                        <Form.Control type="text" placeholder="Rua" id="state" disabled />
                                     </FloatingLabel>
                                 </Col>
                                 <Col>
                                     <FloatingLabel label={city} className="mb-3">
-                                        <Form.Control type="text" placeholder="Rua" disabled />
+                                        <Form.Control type="text" placeholder="Rua" id="city" disabled />
                                     </FloatingLabel>
                                 </Col>
                             </Row>
@@ -174,10 +179,10 @@ export const NewEventView = (_) => {
                                         <Form.Control type="text" placeholder="Bairro" disabled />
                                     </FloatingLabel>
                                 </Col>
-
+                                {/* CONFERIR ID's */}
                                 <Col>
                                     <FloatingLabel label={street} className="mb-3">
-                                        <Form.Control type="text" placeholder="Rua" disabled />
+                                        <Form.Control type="text" placeholder="Rua" id="address" disabled />
                                     </FloatingLabel>
                                 </Col>
                             </Row>
@@ -187,8 +192,9 @@ export const NewEventView = (_) => {
                                     <FloatingLabel label="Número" className="mb-3">
                                         <Form.Control
                                             type="number"
-                                            id="new-event-number"
                                             placeholder="Número"
+                                            id="new-event-number"
+                                            /* CONFERIR ID NUMERO */
                                             required
                                             onChange={() => {
                                                 setNumber(
@@ -203,8 +209,9 @@ export const NewEventView = (_) => {
                                     <FloatingLabel label="Complemento" className="mb-3">
                                         <Form.Control
                                             type="text"
-                                            id="new-event-complement"
                                             placeholder="Complemento"
+                                            id="new-event-complement"
+                                            /* CONFERIR ID COMPLEMENTO */
                                             onChange={() => {
                                                 setComplement(
                                                     document.getElementById("new-event-complement").value
@@ -239,9 +246,9 @@ export const NewEventView = (_) => {
                                 label="Classificação Indicativa"
                                 className="mb-3"
                             >
-                                <Form.Control type="text" placeholder="Classificação Indicativa" />
+                                <Form.Control type="text" placeholder="Classificação Indicativa" id="ageClassification" />
                             </FloatingLabel>
-                        
+
                             <FloatingLabel
                                 controlId="floatingSelect"
                                 label="Gênero de Ingressos"
@@ -253,16 +260,16 @@ export const NewEventView = (_) => {
                                     <option value="2">Feminino e Masculino</option>
                                 </Form.Select>
                             </FloatingLabel>
-                            
+
                             <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Quantidade de Lotes"
-                                    className="mb-3"
-                                >
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Quantidade de Lotes"
-                                    />
+                                controlId="floatingInput"
+                                label="Quantidade de Lotes"
+                                className="mb-3"
+                            >
+                                <Form.Control
+                                    type="number"
+                                    placeholder="Quantidade de Lotes"
+                                />
                             </FloatingLabel>
                         </Col>
 

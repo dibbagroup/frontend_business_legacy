@@ -25,6 +25,10 @@ import { Event } from "../../models/models";
 //     })
 // }
 
+const eventArea = _ => {
+    let lembrete = document.getElementById("lembrete").value
+}
+
 const getInputsValue = _ => {
 
     /* PAGE 1 */
@@ -35,7 +39,6 @@ const getInputsValue = _ => {
     let cep = document.getElementById("cep").value
     let state = document.getElementById("state").value
     let city = document.getElementById("city").value
-    /* let district = document.getElementById("district").value */
     let address = document.getElementById("address").value
     let number = document.getElementById("number").value
     let complement = document.getElementById("complement").value
@@ -44,15 +47,15 @@ const getInputsValue = _ => {
     /* PAGE 2 */
     let ageClassification = document.getElementById("minimiumAge").value
     let categoryTickets = document.getElementById("categoryTickets").value
-    let genderTickets = document.getElementById("ticketsCategory").value
+    let genderTickets = document.getElementById("genderTickets").value
     let areaDistributionImage = document.getElementById("areaDistributionImage").value
+    
     let lotsQuantity = document.getElementById("lotsQuantity").value
-
     let eventArea = document.getElementById("eventArea").value /* tem que receber um array */
 
     /* PAGE 3 */
-    let taxes = document.getElementById("taxes").value
-    let paymentTerm = document.getElementById("paymentTerm").value
+    let clientPaysFee = document.getElementById("clientPaysFee").value
+    let anticipatedPayment = document.getElementById("anticipatedPayment").value
 }
 
 export const NewEventView = (_) => {
@@ -269,6 +272,7 @@ export const NewEventView = (_) => {
                                 <Form.Control
                                     type="number"
                                     placeholder="Quantidade de Lotes"
+                                    id="lotsQuantity"
                                 />
                             </FloatingLabel>
                         </Col>
@@ -279,7 +283,7 @@ export const NewEventView = (_) => {
                                 label="Categoria de Ingressos"
                                 className="mb-3"
                             >
-                                <Form.Select aria-label="Categoria de Ingressos">
+                                <Form.Select aria-label="Categoria de Ingressos" id="categoryTickets">
                                     <option>Escolha...</option>
                                     <option value="1">Individuais</option>
                                     <option value="2">Áreas</option>
@@ -287,7 +291,7 @@ export const NewEventView = (_) => {
                                 </Form.Select>
                             </FloatingLabel>
 
-                            <Form.Control type="file" size="md" className="mb-3" />
+                            <Form.Control type="file" size="md" className="mb-3" id="areaDistribuitionImage" />
                         </Col>
                     </Row>
 
@@ -404,7 +408,7 @@ export const NewEventView = (_) => {
                             label="Como deseja prosseguir em relação as taxas?"
                             className="mb-3"
                         >
-                            <Form.Select aria-label="Taxas">
+                            <Form.Select aria-label="Taxas" id="clientPaysFee">
                                 <option>Escolha...</option>
                                 <option value="1">Assumir taxas</option>
                                 <option value="2">Passe a taxa para os participantes</option>
@@ -413,6 +417,7 @@ export const NewEventView = (_) => {
 
                         <h4 className="text-center mt-3">Pagamento do Evento</h4>
 
+                        {/* Inserir o ID "anticipatedPayment" */}
                         <div className="flex mt-3">
                             <div className="d">
                                 <h3>D+15</h3>

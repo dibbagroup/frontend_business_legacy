@@ -25,8 +25,28 @@ import { Event } from "../../models/models";
 //     })
 // }
 
-const eventArea = _ => {
-    let lembrete = document.getElementById("lembrete").value
+const lots = _ => {
+    /* FAZER SEPARAÇÃO DAS CONSTANTES DE "lots" POR AREAS DE INGRESSO INDIVIDUAL E COLETIVO??? */
+}
+
+class EventSpace {
+    eventSpaceName = document.getElementById("eventSpaceName")
+    ticketPriceMale = document.getElementById("ticketPriceMale").value
+    ticketQuantityMale = document.getElementById("ticketQuantityMale").value
+    ticketPriceFemale = document.getElementById("ticketPriceFemale").value
+    ticketQuantityFemale = document.getElementById("ticketQuantityFemale").value
+    ticketQuantityUnisex = document.getElementById("ticketQuantityUnisex").value
+    ticketPriceUnisex = document.getElementById("ticketPriceUnisex").value
+}
+
+class EventCabin {
+
+    /* INSERIR NO BACK-END */
+    eventCabinName = document.getElementById("eventCabinName").value
+    halfTicketAllowed = document.getElementById("halfTicketAllowed").value
+    allotmentNumber = document.getElementById("allotmentNumber").value
+    ticketQuantityUnisex = document.getElementById("ticketQuantityUnisex").value
+    ticketPriceUnisex = document.getElementById("ticketPriceUnisex").value
 }
 
 const getInputsValue = _ => {
@@ -58,7 +78,7 @@ const getInputsValue = _ => {
     let anticipatedPayment = document.getElementById("anticipatedPayment").value
 }
 
-export const NewEventView = (_) => {
+export const NewEventView = _ => {
     const [step, setStep] = useState(0);
     const [street, setStreet] = useState("Rua");
     const [complement, setComplement] = useState("Complemento");
@@ -67,8 +87,8 @@ export const NewEventView = (_) => {
     const [uf, setUF] = useState("UF");
     const [ddd, setDDD] = useState("ddd");
     const [number, setNumber] = useState("Number");
-
-    const genderTickets = document.getElementById("genderTickets")
+    
+    let genderTickets = document.getElementById("genderTickets")
 
     const getCEP = (cep) => {
         // https://h-apigateway.conectagov.estaleiro.serpro.gov.br/api-cep/v1/consulta/cep/60130240
@@ -314,11 +334,21 @@ export const NewEventView = (_) => {
                             {genderTickets == 1 && (
                                 <Col>
                                     <Col className="mt-3">
-                                        <label htmlFor="ticketValueUnissex" className="mb-1">Valor do Ingresso Unissex</label>
+                                        <label htmlFor="ticketPriceUnissex" className="mb-1">Valor do Ingresso Unissex</label>
                                         <Form.Control
-                                            id="ticketValueUnissex"
+                                            id="ticketPriceUnissex"
                                             type="number"
                                             placeholder="Ex: R$ 65,00"
+                                        />
+                                    </Col>
+
+                                    <Col className="mt-3">
+                                        <label htmlFor="ticketQuantityUnisex" className="mb-1">Quantidade de Ingressos</label>
+
+                                        <Form.Control
+                                            id="ticketQuantityUnisex"
+                                            type="number"
+                                            placeholder="Ex: 100 ingressos"
                                         />
                                     </Col>
                                 </Col>
@@ -327,33 +357,43 @@ export const NewEventView = (_) => {
                             {genderTickets == 2 && (
                                 <Col>
                                     <Col className="mt-3">
-                                        <label htmlFor="ticketValueMasc" className="mb-1">Valor do Ingresso Masculino</label>
+                                        <label htmlFor="ticketPriceMale" className="mb-1">Valor do Ingresso Masculino</label>
                                         <Form.Control
-                                            id="ticketValueMasc"
+                                            id="ticketPriceMale"
                                             type="number"
                                             placeholder="Ex: R$ 87,00"
                                         />
                                     </Col>
                                     <Col className="mt-3">
-                                        <label htmlFor="ticketValueFem" className="mb-1">Valor do Ingresso Feminino</label>
+                                        <label htmlFor="ticketPriceFemale" className="mb-1">Valor do Ingresso Feminino</label>
                                         <Form.Control
-                                            id="ticketValueFem"
+                                            id="ticketPriceFemale"
                                             type="number"
                                             placeholder="Ex: R$ 65,00"
                                         />
                                     </Col>
+
+                                    <Col className="mt-3">
+                                        <label htmlFor="ticketQuantityMale" className="mb-1">Quantidade de Ingressos Masculinos</label>
+
+                                        <Form.Control
+                                            id="ticketQuantityMale"
+                                            type="number"
+                                            placeholder="Ex: 100 ingressos"
+                                        />
+                                    </Col>
+
+                                    <Col className="mt-3">
+                                        <label htmlFor="ticketQuantityFemale" className="mb-1">Quantidade de Ingressos Femininos</label>
+
+                                        <Form.Control
+                                            id="ticketQuantityFemale"
+                                            type="number"
+                                            placeholder="Ex: 100 ingressos"
+                                        />
+                                    </Col>
                                 </Col>
                             )}
-
-                            <Col className="mt-3">
-                                <label htmlFor="ticketsQuantity" className="mb-1">Quantidade de Ingressos</label>
-
-                                <Form.Control
-                                    id="ticketsQuantity"
-                                    type="number"
-                                    placeholder="Ex: 100 ingressos"
-                                />
-                            </Col>
                         </Row>
 
                         <Row className="mt-4">

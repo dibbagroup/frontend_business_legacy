@@ -25,31 +25,47 @@ import { Event } from "../../models/models";
 //     })
 // }
 
-const lots = _ => {
-    /* FAZER SEPARAÇÃO DAS CONSTANTES DE "lots" POR AREAS DE INGRESSO INDIVIDUAL E COLETIVO??? */
-}
-
-class EventSpace {
-    eventSpaceName = document.getElementById("eventSpaceName")
+class SpaceAllotment {
+    allotmentNumber = "" /* GERAÇÃO AUTOMÁTICA */
+    startDateTime = document.getElementById("startDateTime").value
+    endDateTime = document.getElementById("endDateTime").value
+    ticketQuantityUnisex = document.getElementById("ticketQuantityUnisex").value
+    ticketPriceUnisex = document.getElementById("ticketPriceUnisex").value
     ticketPriceMale = document.getElementById("ticketPriceMale").value
     ticketQuantityMale = document.getElementById("ticketQuantityMale").value
     ticketPriceFemale = document.getElementById("ticketPriceFemale").value
     ticketQuantityFemale = document.getElementById("ticketQuantityFemale").value
-    ticketQuantityUnisex = document.getElementById("ticketQuantityUnisex").value
-    ticketPriceUnisex = document.getElementById("ticketPriceUnisex").value
 }
+
+class CabinAllotment {
+    allotmentNumber = "" /* GERAÇÃO AUTOMÁTICA */
+    startDateTime = document.getElementById("startDateTime").value
+    endDateTime = document.getElementById("endDateTime").value
+    ticketQuantity = document.getElementById("ticketQuantity").value
+    ticketPrice = document.getElementById("ticketPrice").value
+}
+
+class EventSpace {
+    id = "" /* GERAÇÃO AUTOMÁTICA */
+    eventId = "" /* Pegar id do evento */
+    eventSpaceName = document.getElementById("eventSpaceName")
+    halfTicketAllowed = document.getElementById("halfTicketAllowed").value
+    allotments = new SpaceAllotment();
+}
+
+/* 
+    Nomes no back vão ser afetados pelo front? seria melhor mudar da mesma forma por organização?
+    allotment
+*/
 
 class EventCabin {
-
-    /* INSERIR NO BACK-END */
-    eventCabinName = document.getElementById("eventCabinName").value
-    halfTicketAllowed = document.getElementById("halfTicketAllowed").value
-    allotmentNumber = document.getElementById("allotmentNumber").value
-    ticketQuantityUnisex = document.getElementById("ticketQuantityUnisex").value
-    ticketPriceUnisex = document.getElementById("ticketPriceUnisex").value
+    id = "" /* GERAÇÃO AUTOMÁTICA */
+    eventId = "" /* Pegar id do evento */
+    eventCabinName = document.getElementById("eventCabinName").value    
+    allotments = new CabinAllotment();
 }
 
-const getInputsValue = _ => {
+const newEventValues = _ => {
 
     /* PAGE 1 */
     let name = document.getElementById("name").value
@@ -63,6 +79,7 @@ const getInputsValue = _ => {
     let number = document.getElementById("number").value
     let complement = document.getElementById("complement").value
     /* DATAS DEVEM SER INSERIDAS */
+    /* DESCRIÇÃO DO ENDEREÇO DEVE SER INSERIDO */
 
     /* PAGE 2 */
     let ageClassification = document.getElementById("minimiumAge").value
@@ -70,7 +87,6 @@ const getInputsValue = _ => {
     let genderTickets = document.getElementById("genderTickets").value
     let areaDistributionImage = document.getElementById("areaDistributionImage").value
     
-    let lotsQuantity = document.getElementById("lotsQuantity").value
     let eventArea = document.getElementById("eventArea").value /* tem que receber um array */
 
     /* PAGE 3 */
@@ -282,18 +298,6 @@ export const NewEventView = _ => {
                                     <option value="1">Unissex</option>
                                     <option value="2">Feminino e Masculino</option>
                                 </Form.Select>
-                            </FloatingLabel>
-
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Quantidade de Lotes"
-                                className="mb-3"
-                            >
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Quantidade de Lotes"
-                                    id="lotsQuantity"
-                                />
                             </FloatingLabel>
                         </Col>
 

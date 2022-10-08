@@ -1,3 +1,7 @@
+main {
+    font-family: 'Poppins';
+}
+
 main.login {
     width: 100vw;
     height: 100vh;
@@ -8,9 +12,9 @@ main.login {
     justify-content: center;
 
     div.container{
-        width: 80%;
-        height: 85vh;
-        background-color: rgba(234, 242, 248, 0.89);
+        width: 90%;
+        height: 85%;
+        background-color: #EEE;
         background-image: url("../../assets/images/Login-degrade-2.png");
         background-repeat: no-repeat;
         background-size: cover;
@@ -46,13 +50,9 @@ main.login {
         padding: 0.3em;
     }
     
-    button.button-login{
-        display: block;
-        color: aliceblue;
+    #btn-signin {
         background-color: #0C001F;
-        box-shadow: 1px 1px 3px 2px #0c001fb2;
-        width: 80%;
-        margin: 0.7em auto 0.5em auto;  
+        border: none;
     }
 }
   

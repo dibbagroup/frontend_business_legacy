@@ -1,4 +1,6 @@
 import "./signInView.scss"
+import { Button, FloatingLabel } from "react-bootstrap"
+import { Form } from "react-bootstrap"
 
 export const SignInView = _ => {
 
@@ -7,10 +9,42 @@ export const SignInView = _ => {
             <div className="container">
                 <form id="form-login" method="POST" /* onSubmit={Validate} */>
                         <h1>Bem Vindo(a)!</h1>
-                        <input type="text" id="inputEmail" placeholder="Email ou CNPJ" minLength={5} maxLength={50} required autofocus/>
-                        <input type="password" id="inputPassword" placeholder="Senha" maxLength={30} required/>
-                        <button className="btn btn-lg btn-block button-login" type="submit">Entrar</button>
-                        <small>Não possui cadastro? <a href="/sign-up">Cadastre-se já!</a> </small>
+
+                        <FloatingLabel
+                        controlId="floatingInput"
+                        label="E-mail ou CNPJ"
+                        className="mb-3"
+                        >
+                            <Form.Control
+                            type="text"
+                            placeholder="E-mail ou CNPJ"
+                            id="name"
+                            minLength={5}
+                            maxLength={50}
+                            required 
+                            />
+                        </FloatingLabel>
+
+                        <FloatingLabel
+                        controlId="floatingInput"
+                        label="Senha"
+                        className="mb-3"
+                        >
+                            <Form.Control
+                            type="text"
+                            placeholder="Senha"
+                            id="password"
+                            required 
+                            />
+                        </FloatingLabel>
+
+                        <Button
+                        variant={"dark"}
+                        className="mb-3"
+                        id="btn-signin"
+                        >Entrar</Button>
+
+                        <small>Não possui cadastro? <a href="/sign-up">Cadastre-se</a> </small>
                 </form>
             </div>
         </main>

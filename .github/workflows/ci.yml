@@ -12,9 +12,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    build:
-        docker:
-        - image: node:18
+    
+    docker:
+    - image: node:18
 
     strategy:
       matrix:

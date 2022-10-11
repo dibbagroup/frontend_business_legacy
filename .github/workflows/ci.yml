@@ -3,8 +3,7 @@ name: Continuous Integration (CI)
 on:
   push:
     branches:
-      # We can define multiple branches as well      
-      - main
+      - feat/*
   pull_request:
     branches:
       - main

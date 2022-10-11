@@ -24,7 +24,7 @@ jobs:
           # node-version-file: '.nvmrc'
 
           # The node version can be hard-coded 
-          node-version: 17.10
+          node-version: 18
         
       # Consider this as an add on to optimize the execution of actions
       - name: Cache node modules
@@ -43,14 +43,6 @@ jobs:
 
       - name: Install package dependencies
         run: npm install
-      
-      - name: Check linting and formatting
-        # Custom script for checking the linting and formatting being in place
-        run: npm run lint
-      
-      # Run test cases and this could ensure minimum coverage as well if set
-      - name: Execute test cases
-        run: npm run test
-        
+
       - name: Create test build
         run: npm run build

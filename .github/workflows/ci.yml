@@ -1,15 +1,15 @@
 name: Continuous Integration (CI)
 
 on:
-  push:
-    branches:
-      - feat/*
+  # push:
+  #   branches:
+  #     - feat/*
   pull_request:
     branches:
       - production
       - dev
       - feat/*
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -15,7 +15,6 @@ class Space{
 
 class Lot {
     allotmentNumber = Number
-
     ticketGender = String; /* (Unissex) ou (Fem e Masc) */
     loteType = String; /* (Individual) ou (Area) */
     /* startDate = Date;

@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - feat/*
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -21,5 +20,4 @@ jobs:
           cache-dependency-path: './package-lock.json'
       - run: npm ci
       - run: npm run build
-      - run: npm run format-check
       - run: npm test

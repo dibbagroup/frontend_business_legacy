@@ -6,7 +6,7 @@ import { DashboardChartViewComponent } from "../../components/dashboard/Dashboar
 import { useState } from "react";
 
 export const DashboardView = (_) => {
-  const [isChartView, setIsChartView] = useState(false);
+  const [isChartView, setIsChartView] = useState(true);
   return (
     <main>
       <HeaderComponent />

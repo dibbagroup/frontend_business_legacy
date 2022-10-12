@@ -18,7 +18,7 @@ export const Footer = _ => {
                 <div className="col-12 text-footer">
                     <h5>Dibba Bussines Site</h5>
                     <small className="d-block mb-3 text-muted"> Dibba Bussines &copy; 2022</small>
-                    <small className="d-block mb-3 text-muted marg"> <a href="#" className="link">Sobre nós</a> </small>
+                    <small className="d-block mb-3 text-muted marg"> <a href="/" className="link">Sobre nós</a> </small>
                     <small className="d-block mb-3 text-muted marg"></small>
                 </div>
             </div>

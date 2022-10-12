@@ -1,32 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Button,
   Col,
-  Container,
   FloatingLabel,
   Form,
-  InputGroup,
   Row,
 } from "react-bootstrap";
 import axios from "axios";
-import { env } from "../../data/env";
 import "./newEventView.scss";
 
-// let eventObject = new Event();
-// const CreateEvent = _ => {
-//     axios.post(env.local.newEvent, eventObject)
-//     .then((res) => {
-//         console.log(res.data)
-//     })
-//     .catch((err) => {
-//         console.log(err)
-//     })
-// }
+/* let eventObject = new Event();
+const CreateEvent = _ => {
+    axios.post(env.local.newEvent, eventObject)
+    .then((res) => {
+        console.log(res.data)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
 
 class SpaceAllotment {
-  allotmentNumber = ""; /* GERAÇÃO AUTOMÁTICA */
-  startDateTime = document.getElementById("startDateTime").value;
-  endDateTime = document.getElementById("endDateTime").value;
+  startDateTimeSpace = document.getElementById("startDateTimeSpace").value;
+  endDateTimeSpace = document.getElementById("endDateTimeSpace").value;
   ticketQuantityUnisex = document.getElementById("ticketQuantityUnisex").value;
   ticketPriceUnisex = document.getElementById("ticketPriceUnisex").value;
   ticketPriceMale = document.getElementById("ticketPriceMale").value;
@@ -36,30 +32,25 @@ class SpaceAllotment {
 }
 
 class CabinAllotment {
-  allotmentNumber = ""; /* GERAÇÃO AUTOMÁTICA */
-  startDateTime = document.getElementById("startDateTime").value;
-  endDateTime = document.getElementById("endDateTime").value;
+  startDateTimeCabin = document.getElementById("startDateTimeCabin").value;
+  endDateTimeCabin = document.getElementById("endDateTimeCabin").value;
   ticketQuantity = document.getElementById("ticketQuantity").value;
   ticketPrice = document.getElementById("ticketPrice").value;
 }
 
 class EventSpace {
-  id = ""; /* GERAÇÃO AUTOMÁTICA */
-  eventId = ""; /* Pegar id do evento */
   eventSpaceName = document.getElementById("eventSpaceName");
-  halfTicketAllowed = document.getElementById("halfTicketAllowed").value;
+  halfTicketAllowed = document.getElementById("halfTicketAllowed").value; LEMBRETE
   allotments = new SpaceAllotment();
 }
 
 class EventCabin {
-  id = ""; /* GERAÇÃO AUTOMÁTICA */
-  eventId = ""; /* Pegar id do evento */
   eventCabinName = document.getElementById("eventCabinName").value;
   allotments = new CabinAllotment();
 }
 
 const newEventValues = (_) => {
-  /* PAGE 1 */
+  LEMBRETE PAGE 1
   let name = document.getElementById("name").value;
   let musicalType = document.getElementById("musicalType").value;
   let startDateTime = document.getElementById("startDateTime").value;
@@ -69,23 +60,23 @@ const newEventValues = (_) => {
   let cep = document.getElementById("new-event-cep").value;
   let state = document.getElementById("state").value;
   let city = document.getElementById("city").value;
+  let addressDescription = document.getElementById("addressDescription").value;
   let address = document.getElementById("address").value;
   let number = document.getElementById("number").value;
-  let complement = document.getElementById("complement").value;
-  let addressDescription = document.getElementById("addressDescription").value;
+  let complement = document.getElementById("new-event-complement").value;
 
-  /* PAGE 2 */
-  let ageClassification = document.getElementById("minimiumAge").value;
-  let categoryTickets = document.getElementById("categoryTickets").value;
+  LEMBRETE PAGE 2
   let genderTickets = document.getElementById("genderTickets").value;
+  let categoryTickets = document.getElementById("categoryTickets").value;
+  let ageClassification = document.getElementById("ageClassification").value;
   let areaDistributionImage = document.getElementById("areaDistributionImage").value;
   let eventSpace = new EventSpace();
   let eventCabin = new EventCabin();
 
-  /* PAGE 3 */
+  LEMBRETE PAGE 3
   let clientPaysFee = document.getElementById("clientPaysFee").value;
   let anticipatedPayment = document.getElementById("anticipatedPayment").value;
-};
+}; */
 
 export const NewEventView = (_) => {
   const [step, setStep] = useState(0);
@@ -98,6 +89,11 @@ export const NewEventView = (_) => {
   const [number, setNumber] = useState("Number");
 
   let genderTickets = document.getElementById("genderTickets");
+
+  setComplement(complement)
+  setNeighborhood(neighborhood)
+  setDDD(ddd)
+  setNumber(number)
 
   const getCEP = (cep) => {
     // https://h-apigateway.conectagov.estaleiro.serpro.gov.br/api-cep/v1/consulta/cep/60130240
@@ -205,12 +201,13 @@ export const NewEventView = (_) => {
                 />
               </FloatingLabel>
 
-              <Form.Control
-                type="file"
-                id="bannerImage"
-                size="md"
-                className="mb-3"
-              />
+              <label htmlFor="bannerImage" className="label-file">Selecione o banner de seu evento</label>
+                <Form.Control
+                  type="file"
+                  id="bannerImage"
+                  size="md"
+                  className="mb-3 input-file"
+                />
             </Col>
 
             {/* RIGHT SIDE */}
@@ -367,21 +364,49 @@ export const NewEventView = (_) => {
           </Row>
 
           <Row>
-            <h4 className="mt-4 text-center">Montando Lotes</h4>
+            <h4 className="mt-4">Montando Lotes</h4>
 
             <Row className="mt-4">
-              <h5 className="text-center">Ingressos Individuais</h5>
+              <h5>Ingressos Individuais</h5>
 
               <Col className="mt-3">
-                <label htmlFor="nameArea" className="mb-1">
+                <label htmlFor="eventSpaceName" className="mb-1">
                   Area do Evento
                 </label>
 
                 <Form.Control
-                  id="nameArea"
+                  id="eventSpaceName"
                   type="text"
                   placeholder="Ex: Pista Premium"
                 />
+              </Col>
+
+              <Col>
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Inicio do Lote"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="datetime-local"
+                    placeholder="Inicio do Lote"
+                    id="startDateTimeSpace"
+                  />
+                </FloatingLabel>
+              </Col>
+
+              <Col>
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Fim do Lote"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="datetime-local"
+                    placeholder="Fim do Lote"
+                    id="endDateTimeSpace"
+                  />
+                </FloatingLabel>
               </Col>
 
               {genderTickets === 1 && (
@@ -462,39 +487,67 @@ export const NewEventView = (_) => {
             </Row>
 
             <Row className="mt-4">
-              <h5 className="text-center">Ingressos por Área</h5>
+              <h5>Ingressos por Área</h5>
 
               <Col className="mt-3">
-                <label htmlFor="nameArea" className="mb-1">
+                <label htmlFor="eventCabinName" className="mb-1">
                   Area do Evento
                 </label>
 
                 <Form.Control
-                  id="nameArea"
+                  id="eventCabinName"
                   type="text"
                   placeholder="Ex: Camarote VIP"
                 />
               </Col>
 
+              <Col>
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Inicio do Lote"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="datetime-local"
+                    placeholder="Inicio do Lote"
+                    id="startDateTimeCabin"
+                  />
+                </FloatingLabel>
+              </Col>
+
+              <Col>
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Fim do Lote"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="datetime-local"
+                    placeholder="Fim do Lote"
+                    id="endDateTimeCabin"
+                  />
+                </FloatingLabel>
+              </Col>
+
               <Col className="mt-3">
-                <label htmlFor="areaValue" className="mb-1">
+                <label htmlFor="ticketPrice" className="mb-1">
                   Valor da Área
                 </label>
 
                 <Form.Control
-                  id="areaValue"
+                  id="ticketPrice"
                   type="number"
                   placeholder="Ex: R$ 500,00"
                 />
               </Col>
 
               <Col className="mt-3">
-                <label htmlFor="ticketsQuantityByArea" className="mb-1">
+                <label htmlFor="ticketQuantity" className="mb-1">
                   Quantidade de Ingressos por Área
                 </label>
 
                 <Form.Control
-                  id="ticketsQuantityByArea"
+                  id="ticketQuantity"
                   type="number"
                   placeholder="Ex: 10 ingressos"
                 />
@@ -522,7 +575,7 @@ export const NewEventView = (_) => {
               >
                 <Form.Select
                   aria-label="Como deseja prosseguir em relação as taxas?"
-                  id="genderTickets"
+                  id="anticipatedPayment"
                 >
                   <option value="0">Escolha...</option>
                   <option value="1">D+15</option>
@@ -556,7 +609,7 @@ export const NewEventView = (_) => {
               >
                 <Form.Select
                   aria-label="Como deseja prosseguir em relação as taxas?"
-                  id="genderTickets"
+                  id="clientPaysFee"
                 >
                   <option>Escolha...</option>
                   <option value="1">Assumir taxas</option>

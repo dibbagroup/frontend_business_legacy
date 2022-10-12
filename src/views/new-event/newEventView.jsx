@@ -105,6 +105,11 @@ export const NewEventView = (_) => {
         setCity(res.data.localidade);
         setUF(res.data.uf);
         setDDD(res.data.ddd);
+
+        //TODO: Corrigir!
+        setNumber(number)
+        setComplement(complement)
+        setDDD(ddd)
       });
     } else {
       setStreet("Rua");

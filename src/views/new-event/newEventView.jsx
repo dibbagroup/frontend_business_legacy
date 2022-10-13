@@ -1,34 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Button,
   Col,
-  Container,
   FloatingLabel,
   Form,
-  InputGroup,
   Row,
 } from "react-bootstrap";
 import axios from "axios";
-import { env } from "../../data/env";
 import "./newEventView.scss";
-import { Header } from "../../components/header/header";
-import { Event } from "../../models/models";
 
-// let eventObject = new Event();
-// const CreateEvent = _ => {
-//     axios.post(env.local.newEvent, eventObject)
-//     .then((res) => {
-//         console.log(res.data)
-//     })
-//     .catch((err) => {
-//         console.log(err)
-//     })
-// }
+/* let eventObject = new Event();
+const CreateEvent = _ => {
+    axios.post(env.local.newEvent, eventObject)
+    .then((res) => {
+        console.log(res.data)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
 
 class SpaceAllotment {
-  allotmentNumber = ""; /* GERAÇÃO AUTOMÁTICA */
-  startDateTime = document.getElementById("startDateTime").value;
-  endDateTime = document.getElementById("endDateTime").value;
+  startDateTimeSpace = document.getElementById("startDateTimeSpace").value;
+  endDateTimeSpace = document.getElementById("endDateTimeSpace").value;
   ticketQuantityUnisex = document.getElementById("ticketQuantityUnisex").value;
   ticketPriceUnisex = document.getElementById("ticketPriceUnisex").value;
   ticketPriceMale = document.getElementById("ticketPriceMale").value;
@@ -38,63 +32,51 @@ class SpaceAllotment {
 }
 
 class CabinAllotment {
-  allotmentNumber = ""; /* GERAÇÃO AUTOMÁTICA */
-  startDateTime = document.getElementById("startDateTime").value;
-  endDateTime = document.getElementById("endDateTime").value;
+  startDateTimeCabin = document.getElementById("startDateTimeCabin").value;
+  endDateTimeCabin = document.getElementById("endDateTimeCabin").value;
   ticketQuantity = document.getElementById("ticketQuantity").value;
   ticketPrice = document.getElementById("ticketPrice").value;
 }
 
 class EventSpace {
-  id = ""; /* GERAÇÃO AUTOMÁTICA */
-  eventId = ""; /* Pegar id do evento */
   eventSpaceName = document.getElementById("eventSpaceName");
-  halfTicketAllowed = document.getElementById("halfTicketAllowed").value;
+  halfTicketAllowed = document.getElementById("halfTicketAllowed").value; LEMBRETE
   allotments = new SpaceAllotment();
 }
 
-/* 
-    Nomes no back vão ser afetados pelo front? seria melhor mudar da mesma forma por organização?
-    allotment
-*/
-
 class EventCabin {
-  id = ""; /* GERAÇÃO AUTOMÁTICA */
-  eventId = ""; /* Pegar id do evento */
   eventCabinName = document.getElementById("eventCabinName").value;
   allotments = new CabinAllotment();
 }
 
 const newEventValues = (_) => {
-  /* PAGE 1 */
+  LEMBRETE PAGE 1
   let name = document.getElementById("name").value;
   let musicalType = document.getElementById("musicalType").value;
+  let startDateTime = document.getElementById("startDateTime").value;
+  let endDateTime = document.getElementById("endDateTime").value;
   let description = document.getElementById("description").value;
   let bannerImage = document.getElementById("bannerImage").value;
-  let cep = document.getElementById("cep").value;
+  let cep = document.getElementById("new-event-cep").value;
   let state = document.getElementById("state").value;
   let city = document.getElementById("city").value;
+  let addressDescription = document.getElementById("addressDescription").value;
   let address = document.getElementById("address").value;
   let number = document.getElementById("number").value;
-  let complement = document.getElementById("complement").value;
-  /* DATAS DEVEM SER INSERIDAS */
-  /* DESCRIÇÃO DO ENDEREÇO DEVE SER INSERIDO */
+  let complement = document.getElementById("new-event-complement").value;
 
-  /* PAGE 2 */
-  let ageClassification = document.getElementById("minimiumAge").value;
-  let categoryTickets = document.getElementById("categoryTickets").value;
+  LEMBRETE PAGE 2
   let genderTickets = document.getElementById("genderTickets").value;
-  let areaDistributionImage = document.getElementById(
-    "areaDistributionImage"
-  ).value;
+  let categoryTickets = document.getElementById("categoryTickets").value;
+  let ageClassification = document.getElementById("ageClassification").value;
+  let areaDistributionImage = document.getElementById("areaDistributionImage").value;
+  let eventSpace = new EventSpace();
+  let eventCabin = new EventCabin();
 
-  let eventArea =
-    document.getElementById("eventArea").value; /* tem que receber um array */
-
-  /* PAGE 3 */
+  LEMBRETE PAGE 3
   let clientPaysFee = document.getElementById("clientPaysFee").value;
   let anticipatedPayment = document.getElementById("anticipatedPayment").value;
-};
+}; */
 
 export const NewEventView = (_) => {
   const [step, setStep] = useState(0);
@@ -108,6 +90,11 @@ export const NewEventView = (_) => {
 
   let genderTickets = document.getElementById("genderTickets");
 
+  setComplement(complement)
+  setNeighborhood(neighborhood)
+  setDDD(ddd)
+  setNumber(number)
+
   const getCEP = (cep) => {
     // https://h-apigateway.conectagov.estaleiro.serpro.gov.br/api-cep/v1/consulta/cep/60130240
     if (cep.length === 8) {
@@ -118,6 +105,11 @@ export const NewEventView = (_) => {
         setCity(res.data.localidade);
         setUF(res.data.uf);
         setDDD(res.data.ddd);
+
+        //TODO: Corrigir!
+        setNumber(number)
+        setComplement(complement)
+        setDDD(ddd)
       });
     } else {
       setStreet("Rua");
@@ -131,16 +123,14 @@ export const NewEventView = (_) => {
   const StepOne = (_) => {
     return (
       <main className="stepOne">
-        {/* HEADER */}
-
         <hr className="my-4" />
 
         <form>
+
           <Row>
             {/* LEFT SIDE */}
             <Col>
               <h4>Detalhes</h4>
-
               <Row>
                 <Col>
                   <FloatingLabel
@@ -164,10 +154,40 @@ export const NewEventView = (_) => {
                   >
                     <Form.Select aria-label="Gênero musical" id="musicalType">
                       <option>Escolha...</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                      <option value="1">Sertanejo Universitário</option>
+                      <option value="2">Rock</option>
+                      <option value="3">Pop</option>
                     </Form.Select>
+                  </FloatingLabel>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col>
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Data de Inicio"
+                    className="mb-3"
+                  >
+                    <Form.Control
+                      type="datetime-local"
+                      placeholder="Data de Inicio"
+                      id="startDateTime"
+                    />
+                  </FloatingLabel>
+                </Col>
+
+                <Col>
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Data de Encerramento"
+                    className="mb-3"
+                  >
+                    <Form.Control
+                      type="datetime-local"
+                      placeholder="Data de Encerramento"
+                      id="endDateTime"
+                    />
                   </FloatingLabel>
                 </Col>
               </Row>
@@ -186,12 +206,13 @@ export const NewEventView = (_) => {
                 />
               </FloatingLabel>
 
-              <Form.Control
-                type="file"
-                id="bannerImage"
-                size="md"
-                className="mb-3"
-              />
+              <label htmlFor="bannerImage" className="label-file">Selecione o banner de seu evento</label>
+                <Form.Control
+                  type="file"
+                  id="bannerImage"
+                  size="md"
+                  className="mb-3 input-file"
+                />
             </Col>
 
             {/* RIGHT SIDE */}
@@ -211,7 +232,7 @@ export const NewEventView = (_) => {
               </FloatingLabel>
 
               <Row>
-                <Col xs={3}>
+                <Col xs={4}>
                   <FloatingLabel label={uf} className="mb-3">
                     <Form.Control
                       type="text"
@@ -234,11 +255,12 @@ export const NewEventView = (_) => {
               </Row>
 
               <Row>
-                <Col xs={3}>
-                  <FloatingLabel label={neighborhood} className="mb-3">
-                    <Form.Control type="text" placeholder="Bairro" disabled />
+                <Col xs={4}>
+                  <FloatingLabel label="Nome do Local" className="mb-3">
+                    <Form.Control type="text" placeholder="Nome do Local" id="addressDescription" />
                   </FloatingLabel>
                 </Col>
+
                 {/* CONFERIR ID's */}
                 <Col>
                   <FloatingLabel label={street} className="mb-3">
@@ -253,7 +275,7 @@ export const NewEventView = (_) => {
               </Row>
 
               <Row>
-                <Col xs={3}>
+                <Col xs={4}>
                   <FloatingLabel label="Número" className="mb-3">
                     <Form.Control
                       type="number"
@@ -278,7 +300,6 @@ export const NewEventView = (_) => {
             </Col>
           </Row>
         </form>
-        {/* FOOTER */}
       </main>
     );
   };
@@ -348,24 +369,52 @@ export const NewEventView = (_) => {
           </Row>
 
           <Row>
-            <h4 className="mt-4 text-center">Montando Lotes</h4>
+            <h4 className="mt-4">Montando Lotes</h4>
 
             <Row className="mt-4">
-              <h5 className="text-center">Ingressos Individuais</h5>
+              <h5>Ingressos Individuais</h5>
 
               <Col className="mt-3">
-                <label htmlFor="nameArea" className="mb-1">
+                <label htmlFor="eventSpaceName" className="mb-1">
                   Area do Evento
                 </label>
 
                 <Form.Control
-                  id="nameArea"
+                  id="eventSpaceName"
                   type="text"
                   placeholder="Ex: Pista Premium"
                 />
               </Col>
 
-              {genderTickets == 1 && (
+              <Col>
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Inicio do Lote"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="datetime-local"
+                    placeholder="Inicio do Lote"
+                    id="startDateTimeSpace"
+                  />
+                </FloatingLabel>
+              </Col>
+
+              <Col>
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Fim do Lote"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="datetime-local"
+                    placeholder="Fim do Lote"
+                    id="endDateTimeSpace"
+                  />
+                </FloatingLabel>
+              </Col>
+
+              {genderTickets === 1 && (
                 <Col>
                   <Col className="mt-3">
                     <label htmlFor="ticketPriceUnissex" className="mb-1">
@@ -392,7 +441,7 @@ export const NewEventView = (_) => {
                 </Col>
               )}
 
-              {genderTickets == 2 && (
+              {genderTickets === 2 && (
                 <Col>
                   <Col className="mt-3">
                     <label htmlFor="ticketPriceMale" className="mb-1">
@@ -443,39 +492,67 @@ export const NewEventView = (_) => {
             </Row>
 
             <Row className="mt-4">
-              <h5 className="text-center">Ingressos por Área</h5>
+              <h5>Ingressos por Área</h5>
 
               <Col className="mt-3">
-                <label htmlFor="nameArea" className="mb-1">
+                <label htmlFor="eventCabinName" className="mb-1">
                   Area do Evento
                 </label>
 
                 <Form.Control
-                  id="nameArea"
+                  id="eventCabinName"
                   type="text"
                   placeholder="Ex: Camarote VIP"
                 />
               </Col>
 
+              <Col>
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Inicio do Lote"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="datetime-local"
+                    placeholder="Inicio do Lote"
+                    id="startDateTimeCabin"
+                  />
+                </FloatingLabel>
+              </Col>
+
+              <Col>
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Fim do Lote"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="datetime-local"
+                    placeholder="Fim do Lote"
+                    id="endDateTimeCabin"
+                  />
+                </FloatingLabel>
+              </Col>
+
               <Col className="mt-3">
-                <label htmlFor="areaValue" className="mb-1">
+                <label htmlFor="ticketPrice" className="mb-1">
                   Valor da Área
                 </label>
 
                 <Form.Control
-                  id="areaValue"
+                  id="ticketPrice"
                   type="number"
                   placeholder="Ex: R$ 500,00"
                 />
               </Col>
 
               <Col className="mt-3">
-                <label htmlFor="ticketsQuantityByArea" className="mb-1">
+                <label htmlFor="ticketQuantity" className="mb-1">
                   Quantidade de Ingressos por Área
                 </label>
 
                 <Form.Control
-                  id="ticketsQuantityByArea"
+                  id="ticketQuantity"
                   type="number"
                   placeholder="Ex: 10 ingressos"
                 />
@@ -503,7 +580,7 @@ export const NewEventView = (_) => {
               >
                 <Form.Select
                   aria-label="Como deseja prosseguir em relação as taxas?"
-                  id="genderTickets"
+                  id="anticipatedPayment"
                 >
                   <option value="0">Escolha...</option>
                   <option value="1">D+15</option>
@@ -537,7 +614,7 @@ export const NewEventView = (_) => {
               >
                 <Form.Select
                   aria-label="Como deseja prosseguir em relação as taxas?"
-                  id="genderTickets"
+                  id="clientPaysFee"
                 >
                   <option>Escolha...</option>
                   <option value="1">Assumir taxas</option>

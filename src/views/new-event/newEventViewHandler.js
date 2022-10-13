@@ -1,4 +1,4 @@
-const body = {
+export const eventBody = {
     name : "Alguma coisa",
     description : "outra",
     /* TAG */

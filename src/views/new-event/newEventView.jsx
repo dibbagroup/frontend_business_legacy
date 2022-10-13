@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { env } from "../../data/env"
 import {
   Button,
   Col,
@@ -7,19 +8,12 @@ import {
   Row,
 } from "react-bootstrap";
 import axios from "axios";
+import { eventBody } from "./newEventViewHandler"
 import "./newEventView.scss";
 
-/* let eventObject = new Event();
-const CreateEvent = _ => {
-    axios.post(env.local.newEvent, eventObject)
-    .then((res) => {
-        console.log(res.data)
-    })
-    .catch((err) => {
-        console.log(err)
-    })
-}
 
+
+/* 
 class SpaceAllotment {
   startDateTimeSpace = document.getElementById("startDateTimeSpace").value;
   endDateTimeSpace = document.getElementById("endDateTimeSpace").value;
@@ -79,6 +73,34 @@ const newEventValues = (_) => {
 }; */
 
 export const NewEventView = (_) => {
+
+  /* function CreateEvent(){
+    let authBody = {
+      username : "mribas",
+      password : "M@noel123"
+    }
+  
+    let token = ""
+    const config = {     headers: { Authorization: `Bearer ${token}` } };
+    
+    axios.post("http://localhost:9090/v1/auth", authBody)
+    .then((res) => {
+        token = res.data.jwtToken
+    })
+  
+    .catch((err) => {
+        console.log(err)
+    })
+  
+    axios.post(env.local.newEvent, eventBody, config)
+    .then((res) => {
+        console.log(res.data)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+  } */
+
   const [step, setStep] = useState(0);
   const [street, setStreet] = useState("Rua");
   const [complement, setComplement] = useState("Complemento");
@@ -123,6 +145,7 @@ export const NewEventView = (_) => {
   const StepOne = (_) => {
     return (
       <main className="stepOne">
+        
         <hr className="my-4" />
 
         <form>

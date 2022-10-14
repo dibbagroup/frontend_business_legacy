@@ -1,17 +1,9 @@
 import { useState } from "react";
-import { env } from "../../data/env"
-import {
-  Button,
-  Col,
-  FloatingLabel,
-  Form,
-  Row,
-} from "react-bootstrap";
+import { env } from "../../data/env";
+import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
 import axios from "axios";
-import { eventBody } from "./newEventViewHandler"
+import { eventBody } from "./newEventViewHandler";
 import "./newEventView.scss";
-
-
 
 /* 
 class SpaceAllotment {
@@ -73,33 +65,34 @@ const newEventValues = (_) => {
 }; */
 
 export const NewEventView = (_) => {
-
-  /* function CreateEvent(){
+  function CreateEvent() {
     let authBody = {
-      username : "mribas",
-      password : "M@noel123"
-    }
-  
-    let token = ""
-    const config = {     headers: { Authorization: `Bearer ${token}` } };
-    
-    axios.post("http://localhost:9090/v1/auth", authBody)
-    .then((res) => {
-        token = res.data.jwtToken
-    })
-  
-    .catch((err) => {
-        console.log(err)
-    })
-  
-    axios.post(env.local.newEvent, eventBody, config)
-    .then((res) => {
-        console.log(res.data)
-    })
-    .catch((err) => {
-        console.log(err)
-    })
-  } */
+      username: "mribas",
+      password: "M@noel123",
+    };
+
+    let token = "";
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+
+    axios
+      .post("http://localhost:9090/v1/auth", authBody)
+      .then((res) => {
+        token = res.data.jwtToken;
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+
+    axios
+      .post(env.local.newEvent, eventBody, config)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   const [step, setStep] = useState(0);
   const [street, setStreet] = useState("Rua");
@@ -111,11 +104,6 @@ export const NewEventView = (_) => {
   const [number, setNumber] = useState("Number");
 
   let genderTickets = document.getElementById("genderTickets");
-
-  setComplement(complement)
-  setNeighborhood(neighborhood)
-  setDDD(ddd)
-  setNumber(number)
 
   const getCEP = (cep) => {
     // https://h-apigateway.conectagov.estaleiro.serpro.gov.br/api-cep/v1/consulta/cep/60130240
@@ -129,9 +117,10 @@ export const NewEventView = (_) => {
         setDDD(res.data.ddd);
 
         //TODO: Corrigir!
-        setNumber(number)
-        setComplement(complement)
-        setDDD(ddd)
+        setComplement(complement);
+        setNeighborhood(neighborhood);
+        setDDD(ddd);
+        setNumber(number);
       });
     } else {
       setStreet("Rua");
@@ -145,13 +134,9 @@ export const NewEventView = (_) => {
   const StepOne = (_) => {
     return (
       <main className="stepOne">
-        
         <hr className="my-4" />
-
         <form>
-
           <Row>
-            {/* LEFT SIDE */}
             <Col>
               <h4>Detalhes</h4>
               <Row>
@@ -229,16 +214,17 @@ export const NewEventView = (_) => {
                 />
               </FloatingLabel>
 
-              <label htmlFor="bannerImage" className="label-file">Selecione o banner de seu evento</label>
-                <Form.Control
-                  type="file"
-                  id="bannerImage"
-                  size="md"
-                  className="mb-3 input-file"
-                />
+              <label htmlFor="bannerImage" className="label-file">
+                Selecione o banner de seu evento
+              </label>
+              <Form.Control
+                type="file"
+                id="bannerImage"
+                size="md"
+                className="mb-3 input-file"
+              />
             </Col>
 
-            {/* RIGHT SIDE */}
             <Col>
               <h4>Local</h4>
               <FloatingLabel label="CEP" className="mb-3">
@@ -280,7 +266,11 @@ export const NewEventView = (_) => {
               <Row>
                 <Col xs={4}>
                   <FloatingLabel label="Nome do Local" className="mb-3">
-                    <Form.Control type="text" placeholder="Nome do Local" id="addressDescription" />
+                    <Form.Control
+                      type="text"
+                      placeholder="Nome do Local"
+                      id="addressDescription"
+                    />
                   </FloatingLabel>
                 </Col>
 
@@ -675,6 +665,15 @@ export const NewEventView = (_) => {
 
   return (
     <main className="p-5 mx-auto">
+      <div className="d-flex justify-content-end my-5">
+        <Button
+          onClick={() => {
+            CreateEvent();
+          }}
+        >
+          Criar evento
+        </Button>
+      </div>
       <div>
         <Row>
           <Col>

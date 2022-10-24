@@ -52,7 +52,9 @@ export const eventBody = {
             ]
         }
     ],
-    addressDescription : "1",
-    categoryTickets : "1", /* NÃO É ENVIADO AO BACK */
-    genderTickets : "1", /* NÃO É ENVIADO AO BACK */
+    addressDescription : "stage music park",
 }
+
+/* 
+
+*/

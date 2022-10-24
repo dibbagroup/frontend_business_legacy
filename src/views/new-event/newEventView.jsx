@@ -65,24 +65,36 @@ const newEventValues = (_) => {
 }; */
 
 export const NewEventView = (_) => {
-  function CreateEvent() {
+
+  async function CreateEvent() {
     let authBody = {
       username: "mribas",
-      password: "M@noel123",
+      password: "M@noel123"
     };
 
-    let token = "";
-    const config = { headers: { Authorization: `Bearer ${token}` } };
+    let tk = ""
 
-    axios
-      .post("http://localhost:9090/v1/auth", authBody)
-      .then((res) => {
-        token = res.data.jwtToken;
-      })
+    await axios
+    .post("http://localhost:9090/v1/auth", authBody)
+    .then((res) => {
+      tk = `Bearer ${res.data.jwtToken}`
+    })
 
-      .catch((err) => {
-        console.log(err);
-      });
+    .catch((err) => {
+      console.log("ERROR!!!!!!!");
+    });
+
+    let config = {
+      headers: { 
+        Authorization: `${tk}`, 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin' : "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        "Accept" : "application/json"
+        
+      }
+    };
+    console.table(config)
 
     axios
       .post(env.local.newEvent, eventBody, config)

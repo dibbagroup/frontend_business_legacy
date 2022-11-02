@@ -2,120 +2,67 @@ import { useState } from "react";
 import { env } from "../../data/env";
 import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
 import axios from "axios";
-import { eventBody } from "./newEventViewHandler";
+import { CreateEvent } from "../../service/newEventService"
 import "./newEventView.scss";
 
-/* 
-class SpaceAllotment {
-  startDateTimeSpace = document.getElementById("startDateTimeSpace").value;
-  endDateTimeSpace = document.getElementById("endDateTimeSpace").value;
-  ticketQuantityUnisex = document.getElementById("ticketQuantityUnisex").value;
-  ticketPriceUnisex = document.getElementById("ticketPriceUnisex").value;
-  ticketPriceMale = document.getElementById("ticketPriceMale").value;
-  ticketQuantityMale = document.getElementById("ticketQuantityMale").value;
-  ticketPriceFemale = document.getElementById("ticketPriceFemale").value;
-  ticketQuantityFemale = document.getElementById("ticketQuantityFemale").value;
-}
-
-class CabinAllotment {
-  startDateTimeCabin = document.getElementById("startDateTimeCabin").value;
-  endDateTimeCabin = document.getElementById("endDateTimeCabin").value;
-  ticketQuantity = document.getElementById("ticketQuantity").value;
-  ticketPrice = document.getElementById("ticketPrice").value;
-}
-
-class EventSpace {
-  eventSpaceName = document.getElementById("eventSpaceName");
-  halfTicketAllowed = document.getElementById("halfTicketAllowed").value; LEMBRETE
-  allotments = new SpaceAllotment();
-}
-
-class EventCabin {
-  eventCabinName = document.getElementById("eventCabinName").value;
-  allotments = new CabinAllotment();
-}
-
-const newEventValues = (_) => {
-  LEMBRETE PAGE 1
-  let name = document.getElementById("name").value;
-  let musicalType = document.getElementById("musicalType").value;
-  let startDateTime = document.getElementById("startDateTime").value;
-  let endDateTime = document.getElementById("endDateTime").value;
-  let description = document.getElementById("description").value;
-  let bannerImage = document.getElementById("bannerImage").value;
-  let cep = document.getElementById("new-event-cep").value;
-  let state = document.getElementById("state").value;
-  let city = document.getElementById("city").value;
-  let addressDescription = document.getElementById("addressDescription").value;
-  let address = document.getElementById("address").value;
-  let number = document.getElementById("number").value;
-  let complement = document.getElementById("new-event-complement").value;
-
-  LEMBRETE PAGE 2
-  let genderTickets = document.getElementById("genderTickets").value;
-  let categoryTickets = document.getElementById("categoryTickets").value;
-  let ageClassification = document.getElementById("ageClassification").value;
-  let areaDistributionImage = document.getElementById("areaDistributionImage").value;
-  let eventSpace = new EventSpace();
-  let eventCabin = new EventCabin();
-
-  LEMBRETE PAGE 3
-  let clientPaysFee = document.getElementById("clientPaysFee").value;
-  let anticipatedPayment = document.getElementById("anticipatedPayment").value;
-}; */
 
 export const NewEventView = (_) => {
-
-  async function CreateEvent() {
-    let authBody = {
-      username: "mribas",
-      password: "M@noel123"
-    };
-
-    let tk = ""
-
-    await axios
-    .post("http://localhost:9090/v1/auth", authBody)
-    .then((res) => {
-      tk = `Bearer ${res.data.jwtToken}`
-    })
-
-    .catch((err) => {
-      console.log("ERROR!!!!!!!");
-    });
-
-    let config = {
-      headers: { 
-        Authorization: `${tk}`, 
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin' : "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-        "Accept" : "application/json"
-        
-      }
-    };
-    console.table(config)
-
-    axios
-      .post(env.local.newEvent, eventBody, config)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
+  // VIEW CONTROLLER
   const [step, setStep] = useState(0);
+
+  // CEP
+  const [cep, setCep] = useState("")
   const [street, setStreet] = useState("Rua");
   const [complement, setComplement] = useState("Complemento");
   const [neighborhood, setNeighborhood] = useState("Bairro");
   const [city, setCity] = useState("Cidade");
   const [uf, setUF] = useState("UF");
   const [ddd, setDDD] = useState("ddd");
-  const [number, setNumber] = useState("Number");
+  const [addressNumber, setAddressNumber] = useState("Number");
+  const [placeName, setPlaceName] = useState("")
 
-  let genderTickets = document.getElementById("genderTickets");
+  // EVENT - Step 01
+  const [eventName, setEventName] = useState("")
+  const [musicalType, setMusicalType] = useState("")
+  const [eventStartDate, setEventStartDate] = useState("")
+  const [eventEndDate, setEventEndDate] = useState("")
+  const [eventDescription, setEventDescription] = useState("")
+  const [eventBanner, setEventBanner] = useState("")
+
+  // EVENT - Step 02
+
+  //VALUES SPACE
+  const [genderTickets, setGenderTickets] = useState("")
+  const [categoryTickets, setCategoryTickets] = useState("")
+  const [ageClassification, setAgeClassification] = useState("")
+  const [areaDistribuitionImage, setAreaDistribuitionImage] = useState("")
+  const [spaceName, setSpaceName] = useState([])
+  const [startDateTimeSpace, setStartDateTimeSpace] = useState([])
+  const [endDateTimeSpace, setEndDateTimeSpace] = useState([])
+  const [ticketPriceUnissex, setTicketPriceUnissex] = useState([])
+  const [ticketQuantityUnissex, setTicketQuantityUnissex] = useState([])
+  const [ticketQuantityMale, setTicketQuantityMale] = useState([])
+  const [ticketQuantityFemale, setTicketQuantityFemale] = useState([])
+  const [ticketPriceMale, setTicketPriceMale] = useState([])
+  const [ticketPriceFemale, setTicketPriceFemale] = useState([])
+
+  //VALUES CABIN
+  const [cabinName, setCabinName] = useState([])
+  const [startDateTimeCabin, setStartDateTimeCabin] = useState([])
+  const [endDateTimeCabin, setEndDateTimeCabin] = useState([])
+  const [ticketPrice, setTicketPrice] = useState([])
+  const [ticketQuantity, setTicketQuantity] = useState([])
+  
+  // EVENT - Step 03
+  const [paymentMethod, setPaymentMethod] = useState("")
+  const [taxes, setTaxes] = useState("")
+  
+
+  const _createEvent = _ => {
+    CreateEvent()
+    return
+  }
+
 
   const getCEP = (cep) => {
     // https://h-apigateway.conectagov.estaleiro.serpro.gov.br/api-cep/v1/consulta/cep/60130240
@@ -153,12 +100,12 @@ export const NewEventView = (_) => {
               <h4>Detalhes</h4>
               <Row>
                 <Col>
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="Nome do Evento"
-                    className="mb-3"
-                  >
+                  <FloatingLabel controlId="floatingInput" label="Nome do Evento" className="mb-3">
                     <Form.Control
+                      value={eventName}
+                      onChange={(e) => {
+                        setEventName(e.target.value)
+                      }}
                       type="text"
                       placeholder="Nome do Evento"
                       id="name"
@@ -190,6 +137,10 @@ export const NewEventView = (_) => {
                     className="mb-3"
                   >
                     <Form.Control
+                      value={startDate}
+                      onChange={(e) => {
+                        setEventStartDate(e.target.value)
+                      }}
                       type="datetime-local"
                       placeholder="Data de Inicio"
                       id="startDateTime"
@@ -204,6 +155,10 @@ export const NewEventView = (_) => {
                     className="mb-3"
                   >
                     <Form.Control
+                      value={eventEndDate}
+                      onChange={(e) => {
+                        setEventEndDate(e.target.value)
+                      }}
                       type="datetime-local"
                       placeholder="Data de Encerramento"
                       id="endDateTime"
@@ -218,6 +173,10 @@ export const NewEventView = (_) => {
                 className="mb-3"
               >
                 <Form.Control
+                  value={description}
+                  onChange={(e) => {
+                    setEventDescription(e.target.value)
+                  }}
                   type="text"
                   placeholder="Descrição"
                   id="description"
@@ -230,6 +189,10 @@ export const NewEventView = (_) => {
                 Selecione o banner de seu evento
               </label>
               <Form.Control
+                value={eventBanner}
+                onChange={(e) => {
+                  setEventBanner(e.target.value)
+                }}
                 type="file"
                 id="bannerImage"
                 size="md"
@@ -241,14 +204,16 @@ export const NewEventView = (_) => {
               <h4>Local</h4>
               <FloatingLabel label="CEP" className="mb-3">
                 <Form.Control
+                  value={cep}
+                  onChange={(e) => {
+                    setCep(e.target.value)
+                    getCEP(cep);
+                  }}
                   type="text"
                   placeholder="CEP"
                   id="new-event-cep"
                   /* CONFERIR ID */
                   maxLength={9}
-                  onChange={() => {
-                    getCEP(document.getElementById("new-event-cep").value);
-                  }}
                 />
               </FloatingLabel>
 
@@ -256,8 +221,9 @@ export const NewEventView = (_) => {
                 <Col xs={4}>
                   <FloatingLabel label={uf} className="mb-3">
                     <Form.Control
+                      value={uf}
                       type="text"
-                      placeholder="Rua"
+                      placeholder="Estado"
                       id="state"
                       disabled
                     />
@@ -266,6 +232,7 @@ export const NewEventView = (_) => {
                 <Col>
                   <FloatingLabel label={city} className="mb-3">
                     <Form.Control
+                      value={city}
                       type="text"
                       placeholder="Rua"
                       id="city"
@@ -279,6 +246,10 @@ export const NewEventView = (_) => {
                 <Col xs={4}>
                   <FloatingLabel label="Nome do Local" className="mb-3">
                     <Form.Control
+                      value={placeName}
+                      onChange={(e) => {
+                        setPlaceName(e.target.value)
+                      }}
                       type="text"
                       placeholder="Nome do Local"
                       id="addressDescription"
@@ -286,10 +257,13 @@ export const NewEventView = (_) => {
                   </FloatingLabel>
                 </Col>
 
-                {/* CONFERIR ID's */}
                 <Col>
                   <FloatingLabel label={street} className="mb-3">
                     <Form.Control
+                      value={street}
+                      onChange={(e) => {
+                        setStreet(e.target.value)
+                      }}
                       type="text"
                       placeholder="Rua"
                       id="address"
@@ -303,10 +277,13 @@ export const NewEventView = (_) => {
                 <Col xs={4}>
                   <FloatingLabel label="Número" className="mb-3">
                     <Form.Control
+                      value={addressNumber}
+                      onChange={(e) => {
+                        setAddressNumber(e.target.value)
+                      }}
                       type="number"
                       placeholder="Número"
                       id="new-event-number"
-                      /* CONFERIR ID NUMERO */
                       required
                     />
                   </FloatingLabel>
@@ -315,6 +292,8 @@ export const NewEventView = (_) => {
                 <Col>
                   <FloatingLabel label="Complemento" className="mb-3">
                     <Form.Control
+                      value={complement}
+                      onChange={(e) => { setComplement(e.target.value) }}
                       type="text"
                       placeholder="Complemento"
                       id="new-event-complement"
@@ -378,6 +357,8 @@ export const NewEventView = (_) => {
                 className="mb-3"
               >
                 <Form.Control
+                  value={ageClassification}
+                  onChange={(e) => { setAgeClassification(e.target.value)}}
                   type="text"
                   placeholder="Classificação Indicativa"
                   id="ageClassification"
@@ -385,6 +366,8 @@ export const NewEventView = (_) => {
               </FloatingLabel>
 
               <Form.Control
+                value={areaDistribuitionImage}
+                onChange={(e) => { setAreaDistribuitionImage(e.target.value)}}
                 type="file"
                 size="md"
                 className="mb-3"
@@ -405,6 +388,8 @@ export const NewEventView = (_) => {
                 </label>
 
                 <Form.Control
+                  value={spaceName}
+                  onChange={(e) => { setSpaceName(e.target.value) }}
                   id="eventSpaceName"
                   type="text"
                   placeholder="Ex: Pista Premium"
@@ -418,6 +403,10 @@ export const NewEventView = (_) => {
                   className="mb-3"
                 >
                   <Form.Control
+                    value={startDateTimeSpace[0]}
+                    onChange={(e) => {
+                      // setSome(e.target.value)
+                    }}
                     type="datetime-local"
                     placeholder="Inicio do Lote"
                     id="startDateTimeSpace"
@@ -432,6 +421,10 @@ export const NewEventView = (_) => {
                   className="mb-3"
                 >
                   <Form.Control
+                    value={endDateTimeSpace[0]}
+                    onChange={(e) => {
+                      // setSome(e.target.value)
+                    }}
                     type="datetime-local"
                     placeholder="Fim do Lote"
                     id="endDateTimeSpace"
@@ -446,6 +439,10 @@ export const NewEventView = (_) => {
                       Valor do Ingresso Unissex
                     </label>
                     <Form.Control
+                      value={startDateTimeSpace[0]}
+                      onChange={(e) => {
+                        // setSome(e.target.value)
+                      }}
                       id="ticketPriceUnissex"
                       type="number"
                       placeholder="Ex: R$ 65,00"
@@ -458,6 +455,10 @@ export const NewEventView = (_) => {
                     </label>
 
                     <Form.Control
+                      value={ticketQuantityUnissex}
+                      onChange={(e) => {
+                        setTicketQuantityUnissex(e.target.value)
+                      }}
                       id="ticketQuantityUnisex"
                       type="number"
                       placeholder="Ex: 100 ingressos"
@@ -473,6 +474,10 @@ export const NewEventView = (_) => {
                       Valor do Ingresso Masculino
                     </label>
                     <Form.Control
+                      value={ticketPriceMale}
+                      onChange={(e) => {
+                        setTicketPriceMale(e.target.value)
+                      }}
                       id="ticketPriceMale"
                       type="number"
                       placeholder="Ex: R$ 87,00"
@@ -483,6 +488,10 @@ export const NewEventView = (_) => {
                       Valor do Ingresso Feminino
                     </label>
                     <Form.Control
+                      value={ticketPriceFemale}
+                      onChange={(e) => {
+                        setTicketPriceFemale(e.target.value)
+                      }}
                       id="ticketPriceFemale"
                       type="number"
                       placeholder="Ex: R$ 65,00"
@@ -495,6 +504,8 @@ export const NewEventView = (_) => {
                     </label>
 
                     <Form.Control
+                      value={ticketQuantityMale}
+                      onChange={(e) => { setTicketQuantityMale(e.target.value) }}
                       id="ticketQuantityMale"
                       type="number"
                       placeholder="Ex: 100 ingressos"
@@ -507,6 +518,11 @@ export const NewEventView = (_) => {
                     </label>
 
                     <Form.Control
+                      value={ticketQuantityFemale}
+                      onChange={(e) => {
+                        setTicketQuantityFemale(e.target.value)
+
+                      }}
                       id="ticketQuantityFemale"
                       type="number"
                       placeholder="Ex: 100 ingressos"
@@ -525,6 +541,10 @@ export const NewEventView = (_) => {
                 </label>
 
                 <Form.Control
+                  // value={""}
+                  // onChange={(e) => {
+                  //   setSome(e.target.value)
+                  // }}
                   id="eventCabinName"
                   type="text"
                   placeholder="Ex: Camarote VIP"
@@ -538,6 +558,10 @@ export const NewEventView = (_) => {
                   className="mb-3"
                 >
                   <Form.Control
+                    // value={ }
+                    // onChange={(e) => {
+                    //   setSome(e.target.value)
+                    // }}
                     type="datetime-local"
                     placeholder="Inicio do Lote"
                     id="startDateTimeCabin"
@@ -552,6 +576,10 @@ export const NewEventView = (_) => {
                   className="mb-3"
                 >
                   <Form.Control
+                    // value={ }
+                    // onChange={(e) => {
+                    //   setSome(e.target.value)
+                    // }}
                     type="datetime-local"
                     placeholder="Fim do Lote"
                     id="endDateTimeCabin"
@@ -565,6 +593,10 @@ export const NewEventView = (_) => {
                 </label>
 
                 <Form.Control
+                  // value={ }
+                  // onChange={(e) => {
+                  //   setSome(e.target.value)
+                  // }}
                   id="ticketPrice"
                   type="number"
                   placeholder="Ex: R$ 500,00"
@@ -577,6 +609,11 @@ export const NewEventView = (_) => {
                 </label>
 
                 <Form.Control
+                  // value={ }
+                  // onChange={(e) => {
+                  //   setSome(e.target.value)
+
+                  // }}
                   id="ticketQuantity"
                   type="number"
                   placeholder="Ex: 10 ingressos"
@@ -680,7 +717,7 @@ export const NewEventView = (_) => {
       <div className="d-flex justify-content-end my-5">
         <Button
           onClick={() => {
-            CreateEvent();
+            _createEvent();
           }}
         >
           Criar evento
@@ -739,9 +776,7 @@ export const NewEventView = (_) => {
       </div>
 
       {step === 0 && <StepOne />}
-
       {step === 1 && <StepTwo />}
-
       {step === 2 && <StepThree />}
     </main>
   );

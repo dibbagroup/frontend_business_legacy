@@ -17,7 +17,6 @@ export const eventBody = {
     clientPaysFee : "1",
     anticipatedPayment : "1",
     qrcodeValidation : "2", /* INSERIR FRONT */
-    /* SPACES */
     spaces : [
         {
             name : "Pista Plus",
@@ -54,7 +53,3 @@ export const eventBody = {
     ],
     addressDescription : "stage music park",
 }
-
-/* 
-
-*/

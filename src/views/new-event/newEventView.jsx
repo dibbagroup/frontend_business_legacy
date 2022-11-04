@@ -2,8 +2,9 @@ import { useState } from "react";
 import { env } from "../../data/env";
 import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
 import axios from "axios";
-import { CreateEvent } from "../../service/newEventService"
+import { CreateEvent } from "../../service/newEvent"
 import "./newEventView.scss";
+import { variables } from "../../global/variables";
 
 
 export const NewEventView = (_) => {
@@ -11,14 +12,15 @@ export const NewEventView = (_) => {
   const [step, setStep] = useState(0);
 
   // CEP
+  const [cepInputFocused, setCepInputFocused] = useState(false)
   const [cep, setCep] = useState("")
-  const [street, setStreet] = useState("Rua");
-  const [complement, setComplement] = useState("Complemento");
-  const [neighborhood, setNeighborhood] = useState("Bairro");
-  const [city, setCity] = useState("Cidade");
-  const [uf, setUF] = useState("UF");
-  const [ddd, setDDD] = useState("ddd");
-  const [addressNumber, setAddressNumber] = useState("Number");
+  const [street, setStreet] = useState("");
+  const [complement, setComplement] = useState("");
+  const [neighborhood, setNeighborhood] = useState("");
+  const [city, setCity] = useState("");
+  const [uf, setUF] = useState("");
+  const [ddd, setDDD] = useState("");
+  const [addressNumber, setAddressNumber] = useState("");
   const [placeName, setPlaceName] = useState("")
 
   // EVENT - Step 01
@@ -30,12 +32,12 @@ export const NewEventView = (_) => {
   const [eventBanner, setEventBanner] = useState("")
 
   // EVENT - Step 02
-
-  //VALUES SPACE
   const [genderTickets, setGenderTickets] = useState("")
   const [categoryTickets, setCategoryTickets] = useState("")
   const [ageClassification, setAgeClassification] = useState("")
-  const [areaDistribuitionImage, setAreaDistribuitionImage] = useState("")
+  const [areaDistributionImage, setAreaDistributionImage] = useState("")
+
+  //VALUES SPACE
   const [spaceName, setSpaceName] = useState([])
   const [startDateTimeSpace, setStartDateTimeSpace] = useState([])
   const [endDateTimeSpace, setEndDateTimeSpace] = useState([])
@@ -56,30 +58,46 @@ export const NewEventView = (_) => {
   // EVENT - Step 03
   const [paymentMethod, setPaymentMethod] = useState("")
   const [taxes, setTaxes] = useState("")
+  const [qrCodeValidation, setQrCodeValidation] = useState(false)
   
 
   const _createEvent = _ => {
+    variables.eventBody.name = eventName
+    variables.eventBody.musicalType = musicalType
+    variables.eventBody.startDateTime = eventStartDate
+    variables.eventBody.endDateTime = eventEndDate
+    variables.eventBody.description = eventDescription
+    variables.eventBody.cep = cep
+    variables.eventBody.address = street
+    variables.eventBody.number = addressNumber
+    variables.eventBody.complement = complement
+    variables.eventBody.ageClassification = ageClassification
+    variables.eventBody.state = uf
+    variables.eventBody.areaDistributionImage = areaDistributionImage
+    variables.eventBody.bannerImage = eventBanner
+    variables.eventBody.musicalType = musicalType
+    variables.eventBody.city = city
+    variables.eventBody.clientPaysFee = taxes
+    variables.eventBody.anticipatedPayment = paymentMethod
+    variables.eventBody.qrcodeValidation = qrCodeValidation
+    variables.eventBody.addressDescription = placeName
     CreateEvent()
     return
   }
 
 
-  const getCEP = (cep) => {
+  const getCEP = _ => {
     // https://h-apigateway.conectagov.estaleiro.serpro.gov.br/api-cep/v1/consulta/cep/60130240
+    setCepInputFocused(true)
     if (cep.length === 8) {
       cep = cep.replace("-", "");
-      axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((res) => {
+      axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((res) => {
         setStreet(res.data.logradouro);
         setNeighborhood(res.data.bairro);
         setCity(res.data.localidade);
         setUF(res.data.uf);
         setDDD(res.data.ddd);
-
-        //TODO: Corrigir!
-        setComplement(complement);
-        setNeighborhood(neighborhood);
-        setDDD(ddd);
-        setNumber(number);
       });
     } else {
       setStreet("Rua");
@@ -137,7 +155,7 @@ export const NewEventView = (_) => {
                     className="mb-3"
                   >
                     <Form.Control
-                      value={startDate}
+                      value={eventStartDate}
                       onChange={(e) => {
                         setEventStartDate(e.target.value)
                       }}
@@ -173,7 +191,7 @@ export const NewEventView = (_) => {
                 className="mb-3"
               >
                 <Form.Control
-                  value={description}
+                  value={eventDescription}
                   onChange={(e) => {
                     setEventDescription(e.target.value)
                   }}
@@ -205,14 +223,11 @@ export const NewEventView = (_) => {
               <FloatingLabel label="CEP" className="mb-3">
                 <Form.Control
                   value={cep}
-                  onChange={(e) => {
-                    setCep(e.target.value)
-                    getCEP(cep);
-                  }}
+                  onChange={e => 
+                    getCEP(e.target.value)
+                  }
                   type="text"
                   placeholder="CEP"
-                  id="new-event-cep"
-                  /* CONFERIR ID */
                   maxLength={9}
                 />
               </FloatingLabel>
@@ -293,10 +308,11 @@ export const NewEventView = (_) => {
                   <FloatingLabel label="Complemento" className="mb-3">
                     <Form.Control
                       value={complement}
-                      onChange={(e) => { setComplement(e.target.value) }}
+                      onChange={(e) => { 
+                        setComplement(e.target.value) 
+                      }}
                       type="text"
                       placeholder="Complemento"
-                      id="new-event-complement"
                     />
                   </FloatingLabel>
                 </Col>
@@ -366,12 +382,12 @@ export const NewEventView = (_) => {
               </FloatingLabel>
 
               <Form.Control
-                value={areaDistribuitionImage}
-                onChange={(e) => { setAreaDistribuitionImage(e.target.value)}}
+                value={areaDistributionImage}
+                onChange={(e) => { setAreaDistributionImage(e.target.value)}}
                 type="file"
                 size="md"
                 className="mb-3"
-                id="areaDistribuitionImage"
+                id="areaDistributionImage"
               />
             </Col>
           </Row>

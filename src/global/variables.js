@@ -10,6 +10,7 @@ export const variables = {
 
         }
     },
+    
     eventBody : {
         name: "Alguma coisa",
         description: "outra",

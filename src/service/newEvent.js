@@ -6,6 +6,8 @@ import axios from "axios";
 export async function CreateEvent() {
     console.log("[*] Creating event")
 
+    console.table(variables.eventBody)
+
     // Deve ser feito apenas no login
     console.log("[*] Running Authentication")
     Authentication()

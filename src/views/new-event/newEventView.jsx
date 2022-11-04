@@ -59,28 +59,64 @@ export const NewEventView = (_) => {
   const [paymentMethod, setPaymentMethod] = useState("")
   const [taxes, setTaxes] = useState("")
   const [qrCodeValidation, setQrCodeValidation] = useState(false)
-  
 
   const _createEvent = _ => {
+    // address
+    variables.eventBody.cep = cep
+    variables.eventBody.address = street
+    variables.eventBody.complement = complement
+    variables.eventBody.city = city
+    variables.eventBody.state = uf
+    variables.eventBody.number = addressNumber
+    variables.eventBody.addressDescription = placeName
+    
+    // step 01
     variables.eventBody.name = eventName
     variables.eventBody.musicalType = musicalType
     variables.eventBody.startDateTime = eventStartDate
     variables.eventBody.endDateTime = eventEndDate
     variables.eventBody.description = eventDescription
-    variables.eventBody.cep = cep
-    variables.eventBody.address = street
-    variables.eventBody.number = addressNumber
-    variables.eventBody.complement = complement
-    variables.eventBody.ageClassification = ageClassification
-    variables.eventBody.state = uf
-    variables.eventBody.areaDistributionImage = areaDistributionImage
     variables.eventBody.bannerImage = eventBanner
-    variables.eventBody.musicalType = musicalType
-    variables.eventBody.city = city
+    
+    // step 02   
+    variables.eventBody.ageClassification = ageClassification
+    variables.eventBody.areaDistributionImage = areaDistributionImage
+
+    // Space Values
+    variables.eventBody.spaces.eventId = 
+    variables.eventBody.spaces.name = 
+    variables.eventBody.spaces.halfTicketAllowed = 
+
+    // Space Allotment Values
+    variables.eventBody.spaces.allotments.allotmentNumber =
+    variables.eventBody.spaces.allotments.startDateTime =
+    variables.eventBody.spaces.allotments.endDateTime =
+    variables.eventBody.spaces.allotments.ticketQuantityUnisex = 
+    variables.eventBody.spaces.allotments.ticketPriceUnisex = 
+    variables.eventBody.spaces.allotments.ticketQuantityFemale = 
+    variables.eventBody.spaces.allotments.ticketQuantityMale = 
+    variables.eventBody.spaces.allotments.ticketPriceFemale = 
+    variables.eventBody.spaces.allotments.ticketPriceMale =  
+    
+    // Cabin Values
+    variables.eventBody.cabins.eventId = 
+    variables.eventBody.cabins.name = 
+
+    // Cabin Allotment Values
+    variables.eventBody.cabins.allotments.allotmentNumber = 
+    variables.eventBody.cabins.allotments.startDateTime =
+    variables.eventBody.cabins.allotments.endDateTime =
+    variables.eventBody.cabins.allotments.ticketPrice = 
+    variables.eventBody.cabins.allotments.ticketQuantity = 
+
+    // step 03
     variables.eventBody.clientPaysFee = taxes
     variables.eventBody.anticipatedPayment = paymentMethod
+
+    // wanted
+    variables.eventBody.ticketCategories = ["FULL", "HALF", "PARTNER_DISCOUNT"]
+    variables.eventBody.userId =
     variables.eventBody.qrcodeValidation = qrCodeValidation
-    variables.eventBody.addressDescription = placeName
     CreateEvent()
     return
   }
@@ -126,7 +162,6 @@ export const NewEventView = (_) => {
                       }}
                       type="text"
                       placeholder="Nome do Evento"
-                      id="name"
                     />
                   </FloatingLabel>
                 </Col>
@@ -161,7 +196,6 @@ export const NewEventView = (_) => {
                       }}
                       type="datetime-local"
                       placeholder="Data de Inicio"
-                      id="startDateTime"
                     />
                   </FloatingLabel>
                 </Col>
@@ -179,7 +213,6 @@ export const NewEventView = (_) => {
                       }}
                       type="datetime-local"
                       placeholder="Data de Encerramento"
-                      id="endDateTime"
                     />
                   </FloatingLabel>
                 </Col>
@@ -197,7 +230,6 @@ export const NewEventView = (_) => {
                   }}
                   type="text"
                   placeholder="Descrição"
-                  id="description"
                   as="textarea"
                   style={{ height: "130px" }}
                 />
@@ -212,7 +244,6 @@ export const NewEventView = (_) => {
                   setEventBanner(e.target.value)
                 }}
                 type="file"
-                id="bannerImage"
                 size="md"
                 className="mb-3 input-file"
               />
@@ -234,23 +265,21 @@ export const NewEventView = (_) => {
 
               <Row>
                 <Col xs={4}>
-                  <FloatingLabel label={uf} className="mb-3">
+                  <FloatingLabel label="UF" className="mb-3">
                     <Form.Control
                       value={uf}
                       type="text"
                       placeholder="Estado"
-                      id="state"
                       disabled
                     />
                   </FloatingLabel>
                 </Col>
                 <Col>
-                  <FloatingLabel label={city} className="mb-3">
+                  <FloatingLabel label="Cidade" className="mb-3">
                     <Form.Control
                       value={city}
                       type="text"
-                      placeholder="Rua"
-                      id="city"
+                      placeholder="Cidade"
                       disabled
                     />
                   </FloatingLabel>
@@ -267,13 +296,13 @@ export const NewEventView = (_) => {
                       }}
                       type="text"
                       placeholder="Nome do Local"
-                      id="addressDescription"
+                      required
                     />
                   </FloatingLabel>
                 </Col>
 
                 <Col>
-                  <FloatingLabel label={street} className="mb-3">
+                  <FloatingLabel label="Rua" className="mb-3">
                     <Form.Control
                       value={street}
                       onChange={(e) => {
@@ -281,7 +310,6 @@ export const NewEventView = (_) => {
                       }}
                       type="text"
                       placeholder="Rua"
-                      id="address"
                       disabled
                     />
                   </FloatingLabel>
@@ -298,7 +326,6 @@ export const NewEventView = (_) => {
                       }}
                       type="number"
                       placeholder="Número"
-                      id="new-event-number"
                       required
                     />
                   </FloatingLabel>
@@ -341,7 +368,6 @@ export const NewEventView = (_) => {
               >
                 <Form.Select
                   aria-label="Gênero de Ingressos"
-                  id="genderTickets"
                 >
                   <option>Escolha...</option>
                   <option value="1">Unissex</option>
@@ -356,7 +382,6 @@ export const NewEventView = (_) => {
               >
                 <Form.Select
                   aria-label="Categoria de Ingressos"
-                  id="categoryTickets"
                 >
                   <option>Escolha...</option>
                   <option value="1">Individuais</option>
@@ -377,7 +402,6 @@ export const NewEventView = (_) => {
                   onChange={(e) => { setAgeClassification(e.target.value)}}
                   type="text"
                   placeholder="Classificação Indicativa"
-                  id="ageClassification"
                 />
               </FloatingLabel>
 
@@ -387,7 +411,6 @@ export const NewEventView = (_) => {
                 type="file"
                 size="md"
                 className="mb-3"
-                id="areaDistributionImage"
               />
             </Col>
           </Row>
@@ -406,7 +429,6 @@ export const NewEventView = (_) => {
                 <Form.Control
                   value={spaceName}
                   onChange={(e) => { setSpaceName(e.target.value) }}
-                  id="eventSpaceName"
                   type="text"
                   placeholder="Ex: Pista Premium"
                 />
@@ -425,7 +447,6 @@ export const NewEventView = (_) => {
                     }}
                     type="datetime-local"
                     placeholder="Inicio do Lote"
-                    id="startDateTimeSpace"
                   />
                 </FloatingLabel>
               </Col>
@@ -443,7 +464,6 @@ export const NewEventView = (_) => {
                     }}
                     type="datetime-local"
                     placeholder="Fim do Lote"
-                    id="endDateTimeSpace"
                   />
                 </FloatingLabel>
               </Col>
@@ -459,7 +479,6 @@ export const NewEventView = (_) => {
                       onChange={(e) => {
                         // setSome(e.target.value)
                       }}
-                      id="ticketPriceUnissex"
                       type="number"
                       placeholder="Ex: R$ 65,00"
                     />
@@ -475,7 +494,6 @@ export const NewEventView = (_) => {
                       onChange={(e) => {
                         setTicketQuantityUnissex(e.target.value)
                       }}
-                      id="ticketQuantityUnisex"
                       type="number"
                       placeholder="Ex: 100 ingressos"
                     />
@@ -494,7 +512,6 @@ export const NewEventView = (_) => {
                       onChange={(e) => {
                         setTicketPriceMale(e.target.value)
                       }}
-                      id="ticketPriceMale"
                       type="number"
                       placeholder="Ex: R$ 87,00"
                     />
@@ -508,7 +525,6 @@ export const NewEventView = (_) => {
                       onChange={(e) => {
                         setTicketPriceFemale(e.target.value)
                       }}
-                      id="ticketPriceFemale"
                       type="number"
                       placeholder="Ex: R$ 65,00"
                     />
@@ -522,7 +538,6 @@ export const NewEventView = (_) => {
                     <Form.Control
                       value={ticketQuantityMale}
                       onChange={(e) => { setTicketQuantityMale(e.target.value) }}
-                      id="ticketQuantityMale"
                       type="number"
                       placeholder="Ex: 100 ingressos"
                     />
@@ -539,7 +554,6 @@ export const NewEventView = (_) => {
                         setTicketQuantityFemale(e.target.value)
 
                       }}
-                      id="ticketQuantityFemale"
                       type="number"
                       placeholder="Ex: 100 ingressos"
                     />
@@ -561,7 +575,6 @@ export const NewEventView = (_) => {
                   // onChange={(e) => {
                   //   setSome(e.target.value)
                   // }}
-                  id="eventCabinName"
                   type="text"
                   placeholder="Ex: Camarote VIP"
                 />
@@ -580,7 +593,6 @@ export const NewEventView = (_) => {
                     // }}
                     type="datetime-local"
                     placeholder="Inicio do Lote"
-                    id="startDateTimeCabin"
                   />
                 </FloatingLabel>
               </Col>
@@ -598,7 +610,6 @@ export const NewEventView = (_) => {
                     // }}
                     type="datetime-local"
                     placeholder="Fim do Lote"
-                    id="endDateTimeCabin"
                   />
                 </FloatingLabel>
               </Col>
@@ -613,7 +624,6 @@ export const NewEventView = (_) => {
                   // onChange={(e) => {
                   //   setSome(e.target.value)
                   // }}
-                  id="ticketPrice"
                   type="number"
                   placeholder="Ex: R$ 500,00"
                 />
@@ -630,7 +640,6 @@ export const NewEventView = (_) => {
                   //   setSome(e.target.value)
 
                   // }}
-                  id="ticketQuantity"
                   type="number"
                   placeholder="Ex: 10 ingressos"
                 />
@@ -658,7 +667,6 @@ export const NewEventView = (_) => {
               >
                 <Form.Select
                   aria-label="Como deseja prosseguir em relação as taxas?"
-                  id="anticipatedPayment"
                 >
                   <option value="0">Escolha...</option>
                   <option value="1">D+15</option>
@@ -692,7 +700,6 @@ export const NewEventView = (_) => {
               >
                 <Form.Select
                   aria-label="Como deseja prosseguir em relação as taxas?"
-                  id="clientPaysFee"
                 >
                   <option>Escolha...</option>
                   <option value="1">Assumir taxas</option>

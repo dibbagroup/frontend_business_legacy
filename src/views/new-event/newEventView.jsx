@@ -5,6 +5,7 @@ import axios from "axios";
 import { CreateEvent } from "../../service/newEvent"
 import "./newEventView.scss";
 import { variables } from "../../global/variables";
+import { Authentication } from "../../service/auth";
 
 
 export const NewEventView = (_) => {
@@ -61,7 +62,7 @@ export const NewEventView = (_) => {
   const [qrCodeValidation, setQrCodeValidation] = useState(false)
 
   const _createEvent = _ => {
-    // address
+    /* // address
     variables.eventBody.cep = cep
     variables.eventBody.address = street
     variables.eventBody.complement = complement
@@ -116,9 +117,8 @@ export const NewEventView = (_) => {
     // wanted
     variables.eventBody.ticketCategories = ["FULL", "HALF", "PARTNER_DISCOUNT"]
     variables.eventBody.userId =
-    variables.eventBody.qrcodeValidation = qrCodeValidation
+    variables.eventBody.qrcodeValidation = qrCodeValidation */
     CreateEvent()
-    return
   }
 
 
@@ -268,6 +268,9 @@ export const NewEventView = (_) => {
                   <FloatingLabel label="UF" className="mb-3">
                     <Form.Control
                       value={uf}
+                      onChange={e => 
+                        setUF(e.target.value)
+                      }
                       type="text"
                       placeholder="Estado"
                       disabled
@@ -278,6 +281,9 @@ export const NewEventView = (_) => {
                   <FloatingLabel label="Cidade" className="mb-3">
                     <Form.Control
                       value={city}
+                      onChange={e => 
+                        setCity(e.target.value)
+                      }
                       type="text"
                       placeholder="Cidade"
                       disabled
@@ -399,7 +405,9 @@ export const NewEventView = (_) => {
               >
                 <Form.Control
                   value={ageClassification}
-                  onChange={(e) => { setAgeClassification(e.target.value)}}
+                  onChange={(e) => {
+                    setAgeClassification(e.target.value)
+                  }}
                   type="text"
                   placeholder="Classificação Indicativa"
                 />
@@ -407,7 +415,9 @@ export const NewEventView = (_) => {
 
               <Form.Control
                 value={areaDistributionImage}
-                onChange={(e) => { setAreaDistributionImage(e.target.value)}}
+                onChange={(e) => {
+                  setAreaDistributionImage(e.target.value)
+                }}
                 type="file"
                 size="md"
                 className="mb-3"
@@ -427,8 +437,10 @@ export const NewEventView = (_) => {
                 </label>
 
                 <Form.Control
-                  value={spaceName}
-                  onChange={(e) => { setSpaceName(e.target.value) }}
+                  value={spaceName[0]}
+                  onChange={(e) => { 
+                    setSpaceName(e.target.value) 
+                  }}
                   type="text"
                   placeholder="Ex: Pista Premium"
                 />
@@ -475,9 +487,9 @@ export const NewEventView = (_) => {
                       Valor do Ingresso Unissex
                     </label>
                     <Form.Control
-                      value={startDateTimeSpace[0]}
+                      value={ticketPriceUnissex[0]}
                       onChange={(e) => {
-                        // setSome(e.target.value)
+                        setTicketPriceUnissex(e.target.value)
                       }}
                       type="number"
                       placeholder="Ex: R$ 65,00"
@@ -490,7 +502,7 @@ export const NewEventView = (_) => {
                     </label>
 
                     <Form.Control
-                      value={ticketQuantityUnissex}
+                      value={ticketQuantityUnissex[0]}
                       onChange={(e) => {
                         setTicketQuantityUnissex(e.target.value)
                       }}
@@ -508,7 +520,7 @@ export const NewEventView = (_) => {
                       Valor do Ingresso Masculino
                     </label>
                     <Form.Control
-                      value={ticketPriceMale}
+                      value={ticketPriceMale[0]}
                       onChange={(e) => {
                         setTicketPriceMale(e.target.value)
                       }}
@@ -521,7 +533,7 @@ export const NewEventView = (_) => {
                       Valor do Ingresso Feminino
                     </label>
                     <Form.Control
-                      value={ticketPriceFemale}
+                      value={ticketPriceFemale[0]}
                       onChange={(e) => {
                         setTicketPriceFemale(e.target.value)
                       }}
@@ -536,8 +548,10 @@ export const NewEventView = (_) => {
                     </label>
 
                     <Form.Control
-                      value={ticketQuantityMale}
-                      onChange={(e) => { setTicketQuantityMale(e.target.value) }}
+                      value={ticketQuantityMale[0]}
+                      onChange={(e) => {
+                        setTicketQuantityMale(e.target.value) 
+                      }}
                       type="number"
                       placeholder="Ex: 100 ingressos"
                     />
@@ -549,7 +563,7 @@ export const NewEventView = (_) => {
                     </label>
 
                     <Form.Control
-                      value={ticketQuantityFemale}
+                      value={ticketQuantityFemale[0]}
                       onChange={(e) => {
                         setTicketQuantityFemale(e.target.value)
 
@@ -571,10 +585,10 @@ export const NewEventView = (_) => {
                 </label>
 
                 <Form.Control
-                  // value={""}
-                  // onChange={(e) => {
-                  //   setSome(e.target.value)
-                  // }}
+                  value={cabinName[0]}
+                  onChange={(e) => {
+                    setCabinName(e.target.value)
+                  }}
                   type="text"
                   placeholder="Ex: Camarote VIP"
                 />
@@ -620,10 +634,10 @@ export const NewEventView = (_) => {
                 </label>
 
                 <Form.Control
-                  // value={ }
-                  // onChange={(e) => {
-                  //   setSome(e.target.value)
-                  // }}
+                  value={ticketPrice}
+                  onChange={(e) => {
+                    setTicketPrice(e.target.value)
+                  }}
                   type="number"
                   placeholder="Ex: R$ 500,00"
                 />
@@ -635,11 +649,10 @@ export const NewEventView = (_) => {
                 </label>
 
                 <Form.Control
-                  // value={ }
-                  // onChange={(e) => {
-                  //   setSome(e.target.value)
-
-                  // }}
+                  value={ticketQuantity}
+                  onChange={(e) => {
+                    setTicketQuantity(e.target.value)
+                  }}
                   type="number"
                   placeholder="Ex: 10 ingressos"
                 />
@@ -744,6 +757,14 @@ export const NewEventView = (_) => {
           }}
         >
           Criar evento
+        </Button>
+
+        <Button
+          onClick={() => {
+            Authentication()
+          }}
+        >
+          Autenticação
         </Button>
       </div>
       <div>

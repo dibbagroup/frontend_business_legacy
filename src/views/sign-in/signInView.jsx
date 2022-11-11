@@ -1,8 +1,13 @@
 import "./signInView.scss"
 import { Button, FloatingLabel } from "react-bootstrap"
 import { Form } from "react-bootstrap"
+import { Authentication } from "../../service/auth"
+import { useState } from "react"
 
 export const SignInView = _ => {
+
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
 
     return (
         <main className="login">
@@ -16,6 +21,10 @@ export const SignInView = _ => {
                         className="mb-3"
                         >
                             <Form.Control
+                            value={username}
+                            onChange={(e) => {
+                                setUsername(e.target.value)
+                            }}
                             type="text"
                             placeholder="E-mail ou CNPJ"
                             id="name"
@@ -31,6 +40,10 @@ export const SignInView = _ => {
                         className="mb-3"
                         >
                             <Form.Control
+                            value={password}
+                            onChange={(e) => {
+                                setPassword(e.target.value)
+                            }}
                             type="text"
                             placeholder="Senha"
                             id="password"
@@ -42,6 +55,7 @@ export const SignInView = _ => {
                         variant={"dark"}
                         className="mb-3"
                         id="btn-signin"
+                        onClick={() =>{Authentication(username, password)}}
                         >Entrar</Button>
 
                         <small>Não possui cadastro? <a href="/sign-up">Cadastre-se</a> </small>

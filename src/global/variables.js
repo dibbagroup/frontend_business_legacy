@@ -1,4 +1,4 @@
-export const variables = {
+                                                                                                                                                                                                                                                                                                                                                                                                                               export const variables = {
     token: "",
     config: {
         headers: {

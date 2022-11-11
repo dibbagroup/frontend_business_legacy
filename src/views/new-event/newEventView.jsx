@@ -124,7 +124,7 @@ export const NewEventView = (_) => {
 
   const getCEP = _ => {
     // https://h-apigateway.conectagov.estaleiro.serpro.gov.br/api-cep/v1/consulta/cep/60130240
-    setCepInputFocused(true)
+    /* setCepInputFocused(true) */
     if (cep.length === 8) {
       cep = cep.replace("-", "");
       axios.get(`https://viacep.com.br/ws/${cep}/json/`)
@@ -136,11 +136,7 @@ export const NewEventView = (_) => {
         setDDD(res.data.ddd);
       });
     } else {
-      setStreet("Rua");
-      setNeighborhood("Bairro");
-      setCity("Cidade");
-      setUF("UF");
-      setDDD("ddd");
+      console.log("erro no cep")
     }
   };
 

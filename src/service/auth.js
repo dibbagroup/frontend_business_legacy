@@ -1,10 +1,10 @@
 import {variables} from "../global/variables"
 import axios from "axios";
 
-export async function Authentication() {
+export async function Authentication(usernameForm, passwordForm) {
     let body = {
-        username: "mcure",
-        password: "12345678"
+        username: usernameForm,
+        password: passwordForm
     };
 
     await axios
@@ -14,7 +14,6 @@ export async function Authentication() {
     .then((res) => {
       let token = `Bearer ${res.data.jwtToken}`
       variables.config.headers.Authorization = token
-      console.log(token)
     })
 
     .catch((err) => {

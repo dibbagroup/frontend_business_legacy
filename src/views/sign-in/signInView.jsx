@@ -59,6 +59,7 @@ export const SignInView = _ => {
                         >Entrar</Button>
 
                         <small>Não possui cadastro? <a href="/sign-up">Cadastre-se</a> </small>
+                        <small>Não possui cadastro? <a href="/">Esqueceu sua senha???</a> </small>
                 </form>
             </div>
         </main>

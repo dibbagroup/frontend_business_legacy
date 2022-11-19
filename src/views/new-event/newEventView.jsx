@@ -6,6 +6,8 @@ import { CreateEvent } from "../../service/newEvent"
 import "./newEventView.scss";
 import { variables } from "../../global/variables";
 import { Authentication } from "../../service/auth";
+import ImageUpload, { ImagemUpload } from "../../data/ImageUpload";
+import { useEffect } from "react";
 
 
 export const NewEventView = (_) => {
@@ -121,6 +123,21 @@ export const NewEventView = (_) => {
     CreateEvent()
   }
 
+  function handleEventBannerChange(e){
+    console.log("file uploaded: ", e.target.files[0]);
+    let file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = handleReaderLoaded.bind(e);
+      /* reader.readAsBinaryString(file); */
+      reader.readAsDataURL(file)
+    }
+  }
+
+  function handleReaderLoaded(e){
+    setEventBanner(e.target.value);
+  };
 
   const getCEP = _ => {
     // https://h-apigateway.conectagov.estaleiro.serpro.gov.br/api-cep/v1/consulta/cep/60130240
@@ -235,13 +252,23 @@ export const NewEventView = (_) => {
                 Selecione o banner de seu evento
               </label>
               <Form.Control
-                value={eventBanner}
+                /* value={eventBanner} */
                 onChange={(e) => {
                   setEventBanner(e.target.value)
+                  handleEventBannerChange(e)
                 }}
                 type="file"
                 size="md"
+                accept=".jpg, .jpeg, .png"
                 className="mb-3 input-file"
+              />
+
+              <input
+                type="file"
+                name="image"
+                id="file"
+                accept=".jpg, .jpeg, .png"
+                onChange={res => handleEventBannerChange(res)}
               />
             </Col>
 

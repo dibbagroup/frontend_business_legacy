@@ -9,7 +9,7 @@ import { SignInView } from "./views/sign-in/signInView";
 import { SignUpView } from "./views/sign-up/signUpView";
 import { SignOutView } from "./views/sign-out/SignOutView";
 import { OnboardingView } from "./views/onboarding/onboardingView";
-import { DashboardView } from "./views/dashboard/dashboardView";
+// import { DashboardView } from "./views/dashboard/dashboardView";
 import { NewEventView } from "./views/new-event/newEventView";
 import { AccountView } from "./views/account/accountView";
 
@@ -22,7 +22,7 @@ root.render(
       <Route path={"/signup"} element={<SignUpView />} />
       <Route path={"/signout"} element={<SignOutView />} />
       <Route path={"/onboarding"} element={<OnboardingView />} />
-      <Route path={"/dashboard"} element={<DashboardView />} />
+      {/* <Route path={"/dashboard"} element={<DashboardView />} /> */}
       <Route path={"/event/new"} element={<NewEventView />} />
       <Route path={"/account"} element={<AccountView />} />
     </Routes>

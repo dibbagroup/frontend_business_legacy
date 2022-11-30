@@ -11,7 +11,7 @@ import { StepTwo } from "../../components/newEvent/stepTwo";
 import { StepThree } from "../../components/newEvent/stepThree";
 
 export const NewEventView = (_) => {
-  // VIEW CONTROLLER
+  
   const [step, setStep] = useState(0);
 
   const _createEvent = _ => {

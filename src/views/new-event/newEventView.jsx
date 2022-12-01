@@ -21,7 +21,7 @@ export const NewEventView = (_) => {
   );
 
   useEffect(() => {
-    eventService.initSessionStorage();
+    // eventService.initSessionStorage();
   }, []);
 
   return (

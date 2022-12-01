@@ -4,27 +4,10 @@ import { Col, FloatingLabel, Form, Row } from "react-bootstrap";
 import EventService from "../../service/event_service";
 
 export const StepOne = (_) => {
-  const [obj, setObj] = useState({
-    cep: "",
-    street: "",
-    complement: "",
-    neighborhood: "",
-    city: "",
-    uf: "",
-    ddd: "",
-    addressNumber: "",
-    placeName: "",
-    eventName: "",
-    musicalType: "",
-    eventStartDate: "",
-    eventEndDate: "",
-    eventDescription: "",
-    eventBanner: "",
-  });
-
-  const musicalTypes = ["Sertanejo Universitário", "Rock", "Pop", "Funk"];
-
   const eventService = new EventService();
+
+  const [obj, setObj] = useState(eventService.getSessionStorage());
+  const musicalTypes = ["Sertanejo Universitário", "Rock", "Pop", "Funk"];
 
   useEffect(() => {
     eventService.updateSessionStorage(obj);
@@ -45,7 +28,7 @@ export const StepOne = (_) => {
   function _handleReaderLoaded(e) {
     setObj({
       ...obj,
-      eventBanner: e.target.result,
+      bannerImage: e.target.result,
     });
   }
 
@@ -83,7 +66,7 @@ export const StepOne = (_) => {
                   className="mb-3"
                 >
                   <Form.Control
-                    value={obj.name}
+                    value={obj.eventName}
                     onChange={(e) => {
                       setObj({ ...obj, eventName: e.target.value });
                     }}
@@ -107,7 +90,7 @@ export const StepOne = (_) => {
                     }}
                   >
                     <option>Escolha...</option>
-                    {musicalTypes.map((e, i) => (
+                    {musicalTypes.map((e, _) => (
                       <option value={e}>{e}</option>
                     ))}
                   </Form.Select>
@@ -173,6 +156,7 @@ export const StepOne = (_) => {
               <Form.Control
                 type="file"
                 accept=".jpg, .jpeg, .png"
+                file={obj.bannerImage}
                 onChange={(e) => onEventBannerInputChange(e)}
               />
             </Form.Group>

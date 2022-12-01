@@ -1,85 +1,35 @@
-import { useState } from "react";
-import { env } from "../../data/env";
-import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
-import { CreateEvent } from "../../service/newEvent"
 import "./newEventView.scss";
-import { variables } from "../../global/variables";
-import { Authentication } from "../../service/auth";
-import { useEffect } from "react";
+
+import { useState } from "react";
+import { Button, Col, Row } from "react-bootstrap";
+
 import { StepOne } from "../../components/newEvent/stepOne";
 import { StepTwo } from "../../components/newEvent/stepTwo";
 import { StepThree } from "../../components/newEvent/stepThree";
 
+import EventService from "../../service/event_service";
+import AuthenticationService from "../../service/authentication_service";
+import { useEffect } from "react";
+
 export const NewEventView = (_) => {
-  
   const [step, setStep] = useState(0);
+  const eventService = new EventService();
+  const authService = new AuthenticationService(
+    "name@gmail.com",
+    "password",
+    null
+  );
 
-  const _createEvent = _ => {
-    /* // address
-    variables.eventBody.cep = cep
-    variables.eventBody.address = street
-    variables.eventBody.complement = complement
-    variables.eventBody.city = city
-    variables.eventBody.state = uf
-    variables.eventBody.number = addressNumber
-    variables.eventBody.addressDescription = placeName
-    
-    // step 01
-    variables.eventBody.name = eventName
-    variables.eventBody.musicalType = musicalType
-    variables.eventBody.startDateTime = eventStartDate
-    variables.eventBody.endDateTime = eventEndDate
-    variables.eventBody.description = eventDescription
-    variables.eventBody.bannerImage = eventBanner
-    
-    // step 02   
-    variables.eventBody.ageClassification = ageClassification
-    variables.eventBody.areaDistributionImage = areaDistributionImage
-
-    // Space Values
-    variables.eventBody.spaces.eventId = 
-    variables.eventBody.spaces.name = 
-    variables.eventBody.spaces.halfTicketAllowed = 
-
-    // Space Allotment Values
-    variables.eventBody.spaces.allotments.allotmentNumber =
-    variables.eventBody.spaces.allotments.startDateTime =
-    variables.eventBody.spaces.allotments.endDateTime =
-    variables.eventBody.spaces.allotments.ticketQuantityUnisex = 
-    variables.eventBody.spaces.allotments.ticketPriceUnisex = 
-    variables.eventBody.spaces.allotments.ticketQuantityFemale = 
-    variables.eventBody.spaces.allotments.ticketQuantityMale = 
-    variables.eventBody.spaces.allotments.ticketPriceFemale = 
-    variables.eventBody.spaces.allotments.ticketPriceMale =  
-    
-    // Cabin Values
-    variables.eventBody.cabins.eventId = 
-    variables.eventBody.cabins.name = 
-
-    // Cabin Allotment Values
-    variables.eventBody.cabins.allotments.allotmentNumber = 
-    variables.eventBody.cabins.allotments.startDateTime =
-    variables.eventBody.cabins.allotments.endDateTime =
-    variables.eventBody.cabins.allotments.ticketPrice = 
-    variables.eventBody.cabins.allotments.ticketQuantity = 
-
-    // step 03
-    variables.eventBody.clientPaysFee = taxes
-    variables.eventBody.anticipatedPayment = paymentMethod
-
-    // wanted
-    variables.eventBody.ticketCategories = ["FULL", "HALF", "PARTNER_DISCOUNT"]
-    variables.eventBody.userId =
-    variables.eventBody.qrcodeValidation = qrCodeValidation */
-    CreateEvent()
-  }
+  useEffect(() => {
+    eventService.initSessionStorage();
+  }, []);
 
   return (
     <main className="p-5 mx-auto">
       <div className="d-flex justify-content-end my-5">
         <Button
           onClick={() => {
-            _createEvent();
+            eventService.create();
           }}
         >
           Criar evento
@@ -87,7 +37,7 @@ export const NewEventView = (_) => {
 
         <Button
           onClick={() => {
-            Authentication()
+            authService.genToken();
           }}
         >
           Autenticação

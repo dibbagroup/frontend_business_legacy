@@ -1,4 +1,4 @@
-import { Header } from "../../components/header/header"
+
 import { Footer } from "../../components/footer/footer"
 
 import "./homeView.scss"
@@ -13,7 +13,6 @@ export const HomeView = _ => {
         <main className="menu">
 
             <article className="header">
-                <Header />
             </article>
 
             <article className="content">

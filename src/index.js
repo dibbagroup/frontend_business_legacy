@@ -9,7 +9,7 @@ import { SignInView } from "./views/sign-in/signInView";
 import { SignUpView } from "./views/sign-up/signUpView";
 import { RecoverPasswordView } from "./views/recover-password/recoverPasswordView";
 import { OnboardingView } from "./views/onboarding/onboardingView";
-import { DashboardView } from "./views/dashboard/dashboardView";
+// import { DashboardView } from "./views/dashboard/dashboardView";
 import { NewEventView } from "./views/new-event/newEventView";
 import { AccountView } from "./views/account/accountView";
 
@@ -22,7 +22,7 @@ root.render(
       <Route path={"/sign-up"} element={<SignUpView />} />
       <Route path={"/recover-password"} element={<RecoverPasswordView />} />
       <Route path={"/onboarding"} element={<OnboardingView />} />
-      <Route path={"/dashboard"} element={<DashboardView />} />
+      {/* <Route path={"/dashboard"} element={<DashboardView />} /> */}
       <Route path={"/event/new"} element={<NewEventView />} />
       <Route path={"/account"} element={<AccountView />} />
     </Routes>

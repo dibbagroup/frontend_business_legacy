@@ -1,12 +1,11 @@
-import { useState } from "react";
 import { Col, FloatingLabel, Form, Row } from "react-bootstrap";
 
 export const StepThree = (_) => {
 
     // EVENT - Step 03
-    const [paymentMethod, setPaymentMethod] = useState("")
+    /* const [paymentMethod, setPaymentMethod] = useState("")
     const [taxes, setTaxes] = useState("")
-    const [qrCodeValidation, setQrCodeValidation] = useState(false)
+    const [qrCodeValidation, setQrCodeValidation] = useState(false) */
 
     return (
         <main className="stepThree">

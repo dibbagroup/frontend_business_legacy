@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { Col, FloatingLabel, Form, Row } from "react-bootstrap";
 import EventService from "../../service/event_service";
@@ -9,9 +9,9 @@ export const StepOne = (_) => {
   const [obj, setObj] = useState(eventService.getSessionStorage());
   const musicalTypes = ["Sertanejo Universitário", "Rock", "Pop", "Funk"];
 
-  useEffect(() => {
+  /* useEffect(() => {
     eventService.updateSessionStorage(obj);
-  }, [obj]);
+  }, [obj]); */
 
   function onEventBannerInputChange(e) {
     console.log("file uploaded: ", e.target.files[0]);

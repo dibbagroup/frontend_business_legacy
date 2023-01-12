@@ -19,7 +19,7 @@ export default class AccountService {
 
     let res = doPost("http://34.224.64.19:9090/users", this.account);
 
-    if (typeof res === Error) return "[!] ", res;
+    /* if (typeof res === Error ) return "[!] ", res; */
 
     let authService = new AuthenticationService();
     authService.setToken(res.data.jwtToken);

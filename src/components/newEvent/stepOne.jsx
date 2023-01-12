@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { Col, FloatingLabel, Form, Row } from "react-bootstrap";
 import EventService from "../../service/event_service";

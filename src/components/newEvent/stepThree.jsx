@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Col, FloatingLabel, Form, Row } from "react-bootstrap";
 
 export const StepThree = (_) => {

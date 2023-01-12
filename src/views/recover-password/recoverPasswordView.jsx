@@ -25,7 +25,6 @@ export const RecoverPasswordView = _ => {
             <h1>ESQUECEU SUA SENHA??????? EM???????</h1>
 
             <input type="text" placeholder="coloque seu email aqui" onChange={(e) => {setEmail(e.target.value)}} />
-
             <Button size="md" className="w-25 m-4" onClick={() => {recoverPassword()}}>CLIQUE AQUI</Button>
         </main>
     )

@@ -9,9 +9,9 @@ export const StepOne = (_) => {
   const [obj, setObj] = useState(eventService.getSessionStorage());
   const musicalTypes = ["Sertanejo Universitário", "Rock", "Pop", "Funk"];
 
-  useEffect(() => {
+  /* useEffect(() => {
     eventService.updateSessionStorage(obj);
-  }, [obj]);
+  }, [obj]); */
 
   function onEventBannerInputChange(e) {
     console.log("file uploaded: ", e.target.files[0]);

@@ -4,8 +4,8 @@ import { Col, FloatingLabel, Form, Row } from "react-bootstrap";
 export const StepTwo = (_) => {
 
     // EVENT - Step 02
-    const [genderTickets, setGenderTickets] = useState("")
-    const [categoryTickets, setCategoryTickets] = useState("")
+    /* const [genderTickets, setGenderTickets] = useState("")
+    const [categoryTickets, setCategoryTickets] = useState("") */
     const [ageClassification, setAgeClassification] = useState("")
     const [areaDistributionImage, setAreaDistributionImage] = useState("")
 
@@ -22,8 +22,8 @@ export const StepTwo = (_) => {
 
     //VALUES CABIN
     const [cabinName, setCabinName] = useState([])
-    const [startDateTimeCabin, setStartDateTimeCabin] = useState([])
-    const [endDateTimeCabin, setEndDateTimeCabin] = useState([])
+    /* const [startDateTimeCabin, setStartDateTimeCabin] = useState([])
+    const [endDateTimeCabin, setEndDateTimeCabin] = useState([]) */
     const [ticketPrice, setTicketPrice] = useState([])
     const [ticketQuantity, setTicketQuantity] = useState([])
 
@@ -124,7 +124,7 @@ export const StepTwo = (_) => {
                                 <Form.Control
                                     value={startDateTimeSpace[0]}
                                     onChange={(e) => {
-                                        // setSome(e.target.value)
+                                        setStartDateTimeSpace(e.target.value)
                                     }}
                                     type="datetime-local"
                                     placeholder="Inicio do Lote"
@@ -141,7 +141,7 @@ export const StepTwo = (_) => {
                                 <Form.Control
                                     value={endDateTimeSpace[0]}
                                     onChange={(e) => {
-                                        // setSome(e.target.value)
+                                        setEndDateTimeSpace(e.target.value)
                                     }}
                                     type="datetime-local"
                                     placeholder="Fim do Lote"
@@ -149,7 +149,7 @@ export const StepTwo = (_) => {
                             </FloatingLabel>
                         </Col>
 
-                        {genderTickets === 1 && (
+                        {/* {genderTickets === 1 && ( */}
                             <Col>
                                 <Col className="mt-3">
                                     <label htmlFor="ticketPriceUnissex" className="mb-1">
@@ -180,9 +180,9 @@ export const StepTwo = (_) => {
                                     />
                                 </Col>
                             </Col>
-                        )}
+                        {/* )} */}
 
-                        {genderTickets === 2 && (
+                        {/* {genderTickets === 2 && ( */}
                             <Col>
                                 <Col className="mt-3">
                                     <label htmlFor="ticketPriceMale" className="mb-1">
@@ -242,7 +242,7 @@ export const StepTwo = (_) => {
                                     />
                                 </Col>
                             </Col>
-                        )}
+                        {/* )} */}
                     </Row>
 
                     <Row className="mt-4">
